@@ -1,0 +1,71 @@
+<?php
+/**	op-module-tutorial:/content/cicd/index.phtml
+ *
+ * @created    2025-07-21
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
+
+/**	namespace
+ *
+ */
+namespace OP;
+
+?>
+<section>
+	<section data-translate="true">
+		<h1>Overview</h1>
+		<p>
+			The ONEPIECE Framework includes CI/CD.
+			This CI/CD is insanely great, with all classes organically connected to CI.
+		</p>
+	</section>
+
+	<section data-translate="true">
+		<h2>What is CI/CD</h2>
+		<p>
+			CI/CD consists of two components: CI and CD.
+			CI stands for Code Inspection. If the code does not pass inspection, it cannot be pushed to the repository.
+			CD stands for Code Delivery. Only code that passes CI inspection will be uploaded to the repository.
+		</p>
+	</section>
+
+	<section data-translate="true">
+		<h2>How do you run CI/CD?</h2>
+		<p>
+			Just run the cicd command.
+			Type the following command, and if the code passes inspection, it will be automatically pushed to the repository:
+		</p>
+		<pre><code>./cicd</code></pre>
+
+		<h2>⚠️Caution⚠️</h2>
+		<p>
+			If you don't run the <code>cicd</code> command, <code>git push</code> will fail.
+		</p>
+	</section>
+
+	<section data-translate="true">
+		<h2>What option arguments are available for <code>cicd</code>?</h2>
+		<p>
+			The following option arguments are available for <code>cicd</code>:
+		</p>
+		<ul>
+			<li><code>test=1</code>: Runs in test mode. CI will automatically <code>git stash</code> any uncommitted changes. This option allows you to test your changes before committing them.</li>
+			<li><code>CI=0</code>: Skips the CI process. Use this when you only want to run CD. However, commits that have not passed code inspection will not be pushed.</li>
+			<li><code>CD=0</code>: Skips the CD process. Use this when you only want to run CI.</li>
+			<li><code>display=1</code>: Enables detailed output messages.</li>
+			<li><code>debug=1</code>: Displays debug information.</li>
+			<li><code>unit=app</code>: Runs CI only for the specified unit.</li>
+			<li><code>class=App</code>: Runs CI only for the specified class.</li>
+			<li><code>method=Auto</code>: Runs CI only for the specified method.</li>
+		</ul>
+	</section>
+</section>
+
+<section>
+	<section data-translate="true">
+		<h1>Technical Information</h1>
+	</section>
+</section>
