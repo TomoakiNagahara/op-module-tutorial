@@ -1,0 +1,55 @@
+<?php
+/**	op-module-tutorial:/content/d/index.phtml
+ *
+ * @created    2025-07-27
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
+
+/**	namespace
+ *
+ */
+namespace OP;
+
+?>
+<section>
+	<div data-translate="true">
+		<h1>Overview</h1>
+	</div>
+
+	<div data-translate="true">
+		<h2>What is "D"?</h2>
+		<p>
+			<code>D</code> is a function used to "Dump" variables, serving as a replacement for <code>var_dump</code>.
+		</p>
+	</div>
+
+	<div data-translate="true">
+		<h2>Feature</h2>
+		<ul>
+			<li>The output is formatted to be more readable than <code>var_dump</code>.</li>
+			<li>The file name and line number are displayed. When using <code>var_dump</code> in multiple places, it often becomes unclear where the output is coming from.</li>
+			<li>The output is shown only to "Admin", so it can safely be used even in production environments.</li>
+			<li>You can call <code>D()</code> from anywhere, regardless of the namespace.</li>
+		</ul>
+	</div>
+
+	<div data-translate="true">
+		<h2>How is the "Admin" determined?</h2>
+		<p>
+			The determination is based on the IP address.
+			The IP addresses recognized as "Admin" are defined in the following configuration file: <code>asset:/config/admin.php</code>
+		</p>
+	</div>
+
+	<div data-translate="true">
+		<h1>How to use</h1>
+	</div>
+	<div data-translate="false">
+		<pre><code>
+D($_SERVER);
+		</code></pre>
+	</div>
+</section>
