@@ -1,0 +1,58 @@
+# What is a UNIT?
+
+A UNIT is a reusable component in the ONEPIECE Framework.
+Controllers, models, views, and libraries are separated into modular units called "UNITs", providing the following benefits:
+
+ * Loosely Coupled: Each UNIT can be developed and tested independently
+ * Reusable: Can be shared across multiple projects
+ * DI / Service Locator: Automatically loads the required UNIT when needed
+ * UNITs are a core concept of the ONEPIECE Framework's architecture.
+
+# How to Use a UNIT
+
+A UNIT can be accessed via `OP()->Unit()`.
+Specify the UNIT name as a string when calling it.
+
+```php
+$app = OP()->Unit('App'); // Get the App unit
+$app->Auto();             // Call a method in the unit
+```
+
+If the file structure is correct, the class will be auto-loaded.
+
+# How to Create a UNIT
+
+Follow the structure below to create a UNIT.
+
+```
+asset/
+└── unit/
+    └── App/
+        ├── index.php
+        └── App.class.php
+```
+
+## index.php
+
+## App.class.php
+
+```php
+//  namespace
+namespace OP\UNIT;
+
+//  App
+class App implement IF_APP
+{
+    //  use trait
+    use OP_CORE, OP_CI;
+
+    //  Auto method
+    public function Auto()
+    {
+        echo "This is App unit.";
+    }
+}
+```
+
+If needed, you can implement the IF_UNIT interface, use template files, or separate configuration files.
+Let me know if you want to build more advanced features.
