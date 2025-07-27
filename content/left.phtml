@@ -1,0 +1,24 @@
+<?php
+
+//	...
+$list = [
+	'cicd'     => 'CI/CD',
+	'D'        => 'D()',
+	'OP'       => 'OP()',
+	'config'   => 'Config',
+	'app'      => 'App',
+	'layout'   => 'Layout',
+	'template' => 'Template',
+	'error'    => 'Error',
+	'notice'   => 'Notice',
+	'html_pass-through' => 'HTML Pass-through',
+	'unit'     => 'Unit',
+	'module'   => 'Module',
+];
+
+?>
+<ul>
+	<?php foreach( $list as $dir => $label ): ?>
+	<li><a href="<?= OP()->URL("tutorial:/{$dir}/index.html") ?>"><?= $label ?></a></li>
+	<?php endforeach; ?>
+</ul>
