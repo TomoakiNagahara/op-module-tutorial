@@ -17,7 +17,7 @@ $list = [
 ];
 
 ?>
-<ul>
+<ul class="menu left">
 	<?php foreach( $list as $dir => $label ): ?>
 	<li><a href="<?= OP()->URL("tutorial:/{$dir}/index.html") ?>"><?= $label ?></a></li>
 	<?php endforeach; ?>
