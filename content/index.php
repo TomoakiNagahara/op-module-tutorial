@@ -39,3 +39,6 @@ if( empty($args) ){
 
 //	...
 OP::Template($path);
+
+//	...
+OP::Unit()->WebPack()->Auto('index.css');
