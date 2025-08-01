@@ -42,3 +42,14 @@ OP::Template($path);
 
 //	...
 OP::Unit()->WebPack()->Auto('index.css');
+
+//	...
+OP()->Unit()->WebPack()->Auto('develop:/webpack/markdown.*');
+
+//	...
+$marked    = OP::isLocalhost() ? OP::URL('develop:/vender/marked.js')    : '//cdn.jsdelivr.net/npm/marked/marked.min.js';
+$highlight = OP::isLocalhost() ? OP::URL('develop:/vender/highlight.js') : '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js';
+
+?>
+<script src="<?= $marked    ?>"></script>
+<script src="<?= $highlight ?>"></script>
