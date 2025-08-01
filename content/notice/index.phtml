@@ -1,4 +1,17 @@
-# "Notice" is notifies errors.
+<?php
+/**	op-module-tutorial:/content/notice/index.phtml
+ *
+ * @created    2025-07-31
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
 
-If the user is an "Admin", the error will be displayed on the screen.
-If the user is not an "Admin", the error will be sent via email.
+/**	namespace
+ *
+ */
+namespace OP;
+
+//	...
+OP::Html(file_get_contents('overview.md'), 'div.markdown');
