@@ -1,0 +1,23 @@
+<?php
+/**	op-module-tutorial:/content/request/index.phtml
+ *
+ * @created    2025-07-31
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
+
+/**	namespace
+ *
+ */
+namespace OP;
+
+?>
+<section data-translation="true">
+	<?php OP::Html(file_get_contents('overview.md'),'div.markdown') ?>
+</section>
+
+<section data-translation="true">
+	<?php OP::Html(file_get_contents('example.md'),'div.markdown') ?>
+</section>
