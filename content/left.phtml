@@ -1,12 +1,34 @@
 <?php
+/**	op-module-tutorial:/content/left.php
+ *
+ * @created    2025-07-27
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
+
+/**	namespace
+ *
+ */
+namespace OP;
+
+//	...
+$args = OP()->Unit()->Router()->Args();
+$arg0 = $args[0] ?? null;
+
+//	...
+if( $arg0 ){
+	OP()->Session()->Set(md5($arg0), true);
+}
 
 //	...
 $list = [
+	'app'      => 'App',
 	'cicd'     => 'CI/CD',
 	'D'        => 'D()',
 	'OP'       => 'OP()',
 	'config'   => 'Config',
-	'app'      => 'App',
 	'layout'   => 'Layout',
 	'template' => 'Template',
 	'error'    => 'Error',
@@ -19,6 +41,22 @@ $list = [
 ?>
 <ul class="menu left">
 	<?php foreach( $list as $dir => $label ): ?>
-	<li><a href="<?= OP()->URL("tutorial:/{$dir}/index.html") ?>"><?= $label ?></a></li>
+		<li>
+			<?php
+			//	...
+			$href = null;
+			$hash = md5($dir);
+
+			//	...
+			if( OP()->Session()->Get($hash) ){
+				$href = OP()->URL("tutorial:/{$dir}/");
+			}
+			?>
+			<?php if( $href ): ?>
+				<a href="<?= $href ?>"><?= $label ?></a>
+			<?php else: ?>
+				<span><?= $label ?></span>
+			<?php endif; ?>
+		</li>
 	<?php endforeach; ?>
 </ul>
