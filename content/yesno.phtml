@@ -1,0 +1,39 @@
+<?php
+/**	op-module-tutorial:/content/yesno.phtml
+ *
+ * @created    2025-08-08
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
+
+/**	namespace
+ *
+ */
+namespace OP;
+
+/* @var $hash    string */
+/* @var $message string */
+
+$file = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 4)[3]['file'];
+$line = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 4)[3]['line'];
+$hash = md5($file.' #'.$line);
+$hash = substr($hash, 0, 8);
+
+//	...
+if( OP()->Session()->Get($hash) ){
+	OP()->Html('👍️',"#{$hash}");
+	return true;
+}
+
+?>
+<section data-translation="true" class="yesno">
+	<p><?= $message ?></p>
+	<a class="button" href="?hash=<?= $hash ?>#<?= $hash ?>">Yes</a>
+	<a class="button" href="">No</a>
+	<form style="display:none">
+		<textarea></textarea>
+		<button> Sent </button>
+	</form>
+</section>
