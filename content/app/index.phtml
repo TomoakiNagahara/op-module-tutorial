@@ -14,14 +14,204 @@
 namespace OP;
 
 ?>
-<section data-translation="true">
-	<?php OP::Html(file_get_contents('overview.md'),'div.markdown') ?>
+<section class="markdown" data-translation="true">
+# Welcome to the First Tutorial
+In this tutorial, you will learn how the ONEPIECE Framework works step by step!
 </section>
 
-<section data-translation="true">
-	<?php OP::Html(file_get_contents('tutorial.md'),'div.markdown') ?>
+<section class="markdown" data-translation="true">
+## "APP" Root
+First, let me explain the "APP" Root.<br/>
+The "APP" Root refers to the directory where the ONEPIECE application is executed.<br/>
+In the case of this application, the following directory is the "APP" Root.<br/>
+
+```sh
+<?= OP()->Path('app:/') ?>
+
+```
+
+Please open the directory above. You should see the ONEPIECE Framework installed there.<br/>
 </section>
 
-<section data-translation="true">
-	<?php OP::Html(file_get_contents('next.md'),'div.markdown') ?>
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Were you able to open the "APP" Root?','yes'=>'Good!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+Now, please check the "APP" Root.
+Let me explain the following important files.
+
+1. `LICENSE`: This is the license for the ONEPIECE Framework.
+1. `README.md`: It contains instructions on how to install and start the ONEPIECE Framework.
+1. `cicd`: This is the command to run CI/CD. It will be explained in detail in the next chapter.
+
+The important files covered in this chapter are listed below.
+
+1. `asset` directory:
+    This directory contains many files required for the ONEPIECE Framework to function properly.
+1. `app.php`:
+    This file is the first one executed by the ONEPIECE Framework.
+    Activate the ONEPIECE mechanism, and then hands over control to `index.php`.
+    In a typical MVC architecture, this file is called the "entry point".
+1. `index.php`:
+    The `index.php` controls access to that directory.
+    You can place an `index.php` file in each directory as needed.
+    In a typical MVC architecture, this file is called the "controller".
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did you find the files listed above?','yes'=>'Very good!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+## Let's get started with development!
+
+Please create a `test` directory in the "APP" Root. The full path is as follows:
+
+```sh
+<?= OP()->Path('app:/test/') ?>
+
+```
+
+Inside the newly created `test` directory, create a file named `index.php`. The full path is as follows:
+
+```sh
+<?= OP()->Path('app:/test/index.php') ?>
+
+```
+
+Now, let's add the following code to `index.php`.
+
+```php
+&lt;?php
+echo "Hello, new world";
+```
+
+Now, let's access the newly developed program. The URL is as follows:
+
+<pre><code>
+<?php
+echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].($_SERVER['SERVER_PORT']==80?'':$_SERVER['SERVER_PORT']).OP()->URL('app:/').'test/' ;
+?>
+</code></pre>
+
+Are `Hello, new world` is displayed?
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'<code>Hello, new world</code> is displayed?',
+	'yes'=>'Congratulation!! You are now a ONEPIECE Framework developers!!!'
+]) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+## Separate the "controller" and the "view"
+
+Now, let’s continue by making one more change.<br/>
+In a typical MVC architecture, it is customary to separate the controller and the view.<br/>
+In the ONEPIECE Framework as well, it is customary to separate the controller and the view.<br/>
+So, how can we display a separated view in the ONEPIECE Framework?<br/>
+
+You use `OP()->Template()`.
+
+## How to Use the `Template` Feature
+
+Now, let’s continue developing.<br/>
+Modify `index.php` as shown below. The full path to the file is as follows: `<?= OP()->Path('app:/test/index.php') ?>`
+
+```php
+&lt;?php
+// echo "Hello, new world";
+OP()->Template('view.phtml');
+```
+
+The above source code outputs the `view.phtml` file.<br/>
+Since we haven't created `view.phtml` yet, let's create it now.<br/>
+The full path of the file to be created is as follows: `<?= OP()->Path('app:/test/view.phtml') ?>`
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Have you finished creating the view.phtml file?']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+Wonderful!
+Now, let's add the following HTML to `view.phtml`!
+
+```html
+<h1>Hello, new world!</h1>
+<p>The NEW WORLD is a new world!!</p>
+```
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did you add the HTML to view.phtml?']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+Fantastic!
+Try reloading the following URL. Are the changes reflected?
+
+```
+<?php
+echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].($_SERVER['SERVER_PORT']==80?'':$_SERVER['SERVER_PORT']).OP()->URL('app:/').'test/' ;
+?>
+
+```
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Are the changes reflected?','yes'=>'Great!!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+# Key Takeaway - Last Piece of Advice
+In the ONEPIECE Framework, the index.php file at a URL’s endpoint serves as the controller for that directory.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did you understand the last piece of advice?','yes'=>'Super Great!!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+You have now mastered the basics of the ONEPIECE Framework!<br/>
+With this, you should now have a solid understanding of the role of `index.php` in the ONEPIECE Framework.<br/>
+There’s nothing more to learn in this chapter — you’ve mastered it perfectly!<br/>
+Now, let’s move on to the next chapter!
+</section>
+
+<section class="markdown" data-translation="true">
+# The next chapter is "CI/CD"
+
+In the next chapter, you will commit the program you created here and push it to the repository using Git.
+The ONEPIECE Framework offers useful tools and various security features — with CI/CD being the first important among them.
+
+You’ve completed the first tutorial!
+Was it difficult? Or was it easier than you expected?
+We’d love to hear your thoughts—feel free to share your feedback!
+
+<form>
+<textarea></textarea>
+<button> Sent </button>
+</form>
+
+In the next chapter, we’ll dive into **CI/CD**.
+Let’s try creating a new commit and pushing it to the repository using the CI/CD workflow❗
+
+[➡️ Let's move on to the next chapter: "CI/CD"](<?php echo OP()->URL('tutorial:/cicd/') ?>)
 </section>
