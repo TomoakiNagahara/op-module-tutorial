@@ -41,7 +41,7 @@ if( empty($args) ){
 OP::Template($path);
 
 //	...
-OP::Unit()->WebPack()->Auto('index.css');
+OP::Unit()->WebPack()->Auto('*.css');
 
 //	...
 OP()->Unit()->WebPack()->Auto('develop:/webpack/markdown.*');
@@ -53,3 +53,4 @@ $highlight = OP::isLocalhost() ? OP::URL('develop:/vender/highlight.js') : '//cd
 ?>
 <script src="<?= $marked    ?>"></script>
 <script src="<?= $highlight ?>"></script>
+
