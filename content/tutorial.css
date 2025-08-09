@@ -14,7 +14,7 @@
 	list-style-type: none;
 }
 
-li {
+.menu.left li {
 	_border:  1px solid black;
 	margin:  0.1em 0.5em;
 	padding: 0;
@@ -37,3 +37,60 @@ a.button {
 hr {
 	width: 90%;
 }
+
+main h1 {
+	padding: 0.25em;
+	padding-left: 0.5rem;
+	color: var(--color-h1);
+	background-color: var(--color-h1-bg);
+}
+
+main h2 {
+	border-bottom: 0.1em solid var(--color-border);
+	padding-left: 0.5rem;
+	padding-bottom: 0.25em;
+}
+
+main h1 code {
+	border-width: 0;
+	color: var(--color-h1);
+	background-color: var(--color-h1-bg);
+	margin: 0 0.25em;
+	padding: 0;
+}
+
+main p, 
+main pre {
+	padding-left: 0.5rem;
+	line-height: 2.0em;
+	_border: 1px solid black;
+}
+
+main li {
+	margin: 0;
+	line-height: 1.75em;
+	_border: 1px solid black;
+}
+
+.yesno {
+	_border: 1px solid black;
+	margin-bottom: 2rem;
+}
+
+.yesno p {
+	margin-bottom: 1.5em;
+}
+
+:root {
+	--color-h1:      #f0f0f0;
+	--color-h1-bg:   #303030;
+}
+
+/* <?php if( OP()->Config('layout')['darkmode'] ?? null ): ?> */
+@media (prefers-color-scheme: dark) {
+	:root {
+	--color-h1:      #f0f0f0;
+	--color-h1-bg:   #303030;
+	}
+}
+/* <?php endif; ?> */
