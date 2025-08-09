@@ -14,7 +14,7 @@
 	list-style-type: none;
 }
 
-li {
+.menu.left li {
 	_border:  1px solid black;
 	margin:  0.1em 0.5em;
 	padding: 0;
@@ -37,3 +37,55 @@ a.button {
 hr {
 	width: 90%;
 }
+
+h1 {
+	padding: 0.25em;
+	padding-left: 0.5rem;
+	color: var(--color-h1);
+	background-color: var(--color-h1-bg);
+}
+
+h2 {
+	border-bottom: 0.1em solid var(--color-border);
+	padding-left: 0.5rem;
+	padding-bottom: 0.25em;
+}
+
+section p, 
+section pre {
+	padding-left: 0.5rem;
+	_border: 1px solid black;
+}
+
+p {
+	_border: 1px solid black;
+}
+
+section li {
+	margin: 0;
+	line-height: 1.75em;
+	_border: 1px solid black;
+}
+
+.yesno {
+	_border: 1px solid black;
+	margin-bottom: 2rem;
+}
+
+.yesno p {
+	margin-bottom: 1.5em;
+}
+
+:root {
+	--color-h1:      #f0f0f0;
+	--color-h1-bg:   #303030;
+}
+
+/* <?php if( OP()->Config('layout')['darkmode'] ?? null ): ?> */
+@media (prefers-color-scheme: dark) {
+	:root {
+	--color-h1:      #f0f0f0;
+	--color-h1-bg:   #303030;
+	}
+}
+/* <?php endif; ?> */
