@@ -1,5 +1,5 @@
 <?php
-/**	op-module-tutorial:/content/d/index.phtml
+/**	op-module-tutorial:/content/D/index.phtml
  *
  * @created    2025-07-27
  * @version    1.0
@@ -14,42 +14,124 @@
 namespace OP;
 
 ?>
-<section>
-	<div data-translate="true">
-		<h1>Overview</h1>
-	</div>
+<section class="markdown" data-translation="true">
+# What is `D()`?
 
-	<div data-translate="true">
-		<h2>What is "D"?</h2>
-		<p>
-			<code>D</code> is a function used to "Dump" variables, serving as a replacement for <code>var_dump</code>.
-		</p>
-	</div>
+`D()` is a function used to "Dump" variables, serving as a replacement for `var_dump()` or `print_r()`.
+</section>
 
-	<div data-translate="true">
-		<h2>Feature</h2>
-		<ul>
-			<li>The output is formatted to be more readable than <code>var_dump</code>.</li>
-			<li>The file name and line number are displayed. When using <code>var_dump</code> in multiple places, it often becomes unclear where the output is coming from.</li>
-			<li>The output is shown only to "Admin", so it can safely be used even in production environments.</li>
-			<li>You can call <code>D()</code> from anywhere, regardless of the namespace.</li>
-		</ul>
-	</div>
+<section class="markdown" data-translation="true">
+## Let’s try it out.
 
-	<div data-translate="true">
-		<h2>How is the "Admin" determined?</h2>
-		<p>
-			The determination is based on the IP address.
-			The IP addresses recognized as "Admin" are defined in the following configuration file: <code>asset:/config/admin.php</code>
-		</p>
-	</div>
+Practice over theory!
 
-	<div data-translate="true">
-		<h1>How to use</h1>
-	</div>
-	<div data-translate="false">
-		<pre><code>
-D($_SERVER);
-		</code></pre>
-	</div>
+Let’s add the following code to the `app:/test/index.php` file.
+
+```php
+D( $_GET );
+```
+
+If you see the following output, it means success: `app:/test/index.php #11 - array(0)`<br/>
+This output not only shows the dumped variable but also displays the file name and line number where `D()` was called.<br/>
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did the dump appear?','yes'=>'That’s wonderful!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+## Let’s Add a URL Query!
+
+Is `$_GET` empty?<br/>
+`$_GET` is a mechanism for sending values to the server by appending them to the end of a URL.<br/>
+This mechanism is called a URL query.<br/>
+
+Now let's add a URL query to the end of the URL and display the variables.<br/>
+To display the variables, append values to the end of the URL as shown below.<br/>
+
+<pre><code class="nohighlight no-highlight"><?php
+echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].($_SERVER['SERVER_PORT']==80?'':$_SERVER['SERVER_PORT']).OP()->URL('app:/').'test/';
+echo '<span style="color:red">?foo=bar&OS[]=mac&OS[]=win&OS[]=linux&XSS=&lt;h1&gt;</span>';
+?></code></pre>
+
+After adding the URL query, reload the page in your browser.<br/>
+If the display looks like the example below, it means success.<br/>
+</section>
+
+<?php D(['foo'=>'bar', 'OS'=>['mac','win','linux'], 'XSS'=>'<h1>']) ?>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did you see a well-organized and easy-to-read dump?','yes'=>'That’s very wonderful!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+## Dumps are only visible to "Admin"
+
+`D()` has another hidden, cool feature: it's only visible to administrators.
+
+This means that even if you use `D()` in a production environment, your visitors won't see the variables.
+It's only visible to you.
+</section>
+
+<section class="markdown" data-translation="true">
+## How is the "Admin" determined?
+
+The determination is based on the IP address.<br/>
+Only two addresses are considered "admin": localhost and registered IP addresses.<br/>
+Please register the administrator's IP address in the following file: <code>asset:/config/admin.php</code>
+</section>
+
+<pre><code>
+return [
+    //  <span class="markdown" data-translation="true">Access with this IP address will enable developer mode.</span>
+    OP::_ADMIN_IP_   => '127.0.0.1',
+
+    //  <span class="markdown" data-translation="true">An error message will be sent to this email address.</span>
+    OP::_ADMIN_MAIL_ => 'info@onepiece-framework.com',
+
+    //  <span class="markdown" data-translation="true">This email address will be the from of the admin email.</span>
+    OP::_ADMIN_FROM_ => 'noreply@onepiece-framework.com',
+];
+</code></pre>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Have you registered the administrator\'s IP address?','yes'=>'Amazing!!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+# Key points of this chapter
+
+The `D()` function in the ONEPIECE Framework dumps variables.
+Here’s why it is superior to `var_dump()` or `print_r()`:
+
+ * Safe — No XSS vulnerabilities occur.
+ * Traceable — You can see exactly where it was called.
+ * Readable — The output is clean and easy to understand.
+ * Secure for production — Displayed only to administrators, so it can be used even in a production environment.
+ * Admin-based access — Administrator status is determined by IP address.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did you understand the last piece of advice?','yes'=>'Super Great!!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+# The next chapter is finally about the `OP()` function.
+
+The `OP()` function is the core feature of the ONEPIECE Framework.<br/>
+All functions of the ONEPIECE Framework can be accessed through the `OP()`.<br/>
+
+<?php OP()->Template('tutorial:/feedback.phtml') ?>
+
+In the next chapter, we’ll dive into **OP()**.
+
+[➡️ Let's move on to the next chapter: "OP()"](<?php echo OP()->URL('tutorial:/OP/') ?>)
 </section>
