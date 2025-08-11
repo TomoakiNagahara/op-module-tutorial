@@ -13,28 +13,33 @@
  */
 namespace OP;
 
-//	...
+//	Set meta root.
 $endpoint = OP()->Unit()->Router()->EndPoint();
 $tutorial = dirname($endpoint);
 $develop  = dirname($tutorial);
 RootPath('tutorial', $tutorial);
 RootPath('develop',  $develop);
 
-//	...
+//	Set layout template files.
 $layout = OP()->Config('layout');
 $layout['name'] = OP()->Config('develop')['layout'] ?? 'flexbox';
 $layout['path']['menu']['top']  = realpath("./top.phtml");
 $layout['path']['menu']['left'] = realpath("./left.phtml");
 OP()->Config('layout', $layout);
 
-//	...
+//	Get URL Args.
 $args = OP()->Unit()->Router()->Args();
 
-//	...
+//	Branch page.
 if( empty($args) ){
 	$path = 'index.phtml';
 }else{
 	$path = $args[0] .'/index.phtml';
+
+	//	Set yes/no hash.
+	if( $hash = OP()->Request('hash') ){
+		OP()->Session()->Set($hash, true);
+	}
 }
 
 //	...
