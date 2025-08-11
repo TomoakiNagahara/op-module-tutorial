@@ -13,8 +13,8 @@
  */
 namespace OP;
 
-/* @var $hash    string */
 /* @var $message string */
+/* @var $yes     string */
 
 $file = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 4)[3]['file'];
 $line = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 4)[3]['line'];
@@ -23,7 +23,9 @@ $hash = substr($hash, 0, 8);
 
 //	...
 if( OP()->Session()->Get($hash) ){
-	OP()->Html('👍️',"#{$hash}");
+	echo "👍";
+	if( $yes ?? null ){ echo " <span id='{$hash}' data-translation='true'>{$yes}</span>"; }
+	echo '<br/>';
 	return true;
 }
 
