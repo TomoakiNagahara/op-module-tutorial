@@ -1,20 +1,128 @@
+<?php
+/**	op-module-tutorial:/content/OP/index.phtml
+ *
+ * @created    2025-07-27
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
 
-# Overview
+/**	namespace
+ *
+ */
+namespace OP;
 
-# Methods
+?>
+<section class="markdown" data-translation="true">
+# What is `OP()`?
 
-## Mail()
+`OP()` is a function that allows you to access all the functions of the ONEPIECE framework.<br/>
+Using `OP()`, you can access all the functions of the ONEPIECE framework.<br/>
 
-## Time()
+For example, inside the `D()` function in the previous chapter, we use `OP()->isAdmin()` to determine whether the visitor is an administrator.<br/>
+If the IP address of the visitor accessing the page matches the IP address of a registered administrator, it returns `true`.<br/>
 
-## Timestamp()
+```php
+if( OP()->isAdmin() ){
+    echo 'Your Admin.';
+}else{
+    echo 'Your not Admin.';
+}
+```
 
-## Unit()
+There are also "method" that make it easier to work with sessions and cookies.
 
-## isAdmin()
+```php
+$count = OP()->Session()->Get('count', 0);
+$count = $count + 1;
+OP()->Session->Set('count', $count);
+D("Session: $count");
+```
 
-## isLocalhost()
+```php
+$count = OP()->Cookie()->Get('count', 0);
+$count = $count + 1;
+OP()->Cookie()->Set('count', $count);
+D("Cookie: $count");
+```
 
-## isCI()
+`OP()` was implements many methods, but in this tutorial we will focus on `Template()` method!
+</section>
 
-## isShell()
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Want to know how to use Template()?',
+	'yes'=>'That\'s nice!',
+	'no' =>'Why?! Please tell me the reason!!',
+]) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+In the "App" chapter, `view.phtml` was displayed from `app:/test/index.php` using `include()`.<br/>
+Let's take this a step further and display it with `OP()->Template()`.<br/>
+
+Modify `app:/test/index.php` as follows:
+
+```php
+// include('view.phtml');
+OP()->Template('view.phtml');
+```
+
+Reload the page in your browser to refresh the page.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Did it displayed?',
+	'yes'=>'Good job!',
+	'no' =>'',
+]) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+In fact, the Template() function has much more to offer.
+In the next chapter, we'll explore the Template() function in more depth.
+</section>
+
+<section class="markdown" data-translation="true">
+# Key Takeaway - Last Piece of Advice
+
+All ONEPIECE functions can be called from `OP()`.
+
+* `isAdmin()`: Checks whether the access is "Admin".
+* `Session()`: Sessions can be handled easily and safely.
+* `Cookie()`: Cookies can be handled easily and safely.
+* `Request()`: GET and POST methods can be handled easily and safely.
+* `Html()`: HTML tags can be output easily and safely.
+* `Template()`: File inclusion can be done easily and safely.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Did you understand the last piece of advice?',
+	'yes'=>'Super Great!!',
+	'no' =>'',
+]) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+# 次の章はONEPIECEフレームワークのテンプレート機能についてです！
+
+The template function of the ONEPIECE framework has the following features:
+
+* Ability to pass arguments
+* Ability to obtain return values
+
+<?php OP()->Template('tutorial:/feedback.phtml') ?>
+
+In the next chapter, we’ll dive into **Template**.
+
+[➡️ Let's move on to the next chapter: "Template"](<?php echo OP()->URL('tutorial:/template/') ?>)
+</section>
