@@ -42,9 +42,8 @@ OP::Template($path);
 
 //	...
 OP::Unit()->WebPack()->Auto('*.css');
-
-//	...
-OP()->Unit()->WebPack()->Auto('develop:/webpack/markdown.*');
+OP::Unit()->WebPack()->Auto("asset:/webpack/css/syntax.css");
+OP::Unit()->WebPack()->Auto('develop:/webpack/markdown.*');
 
 //	...
 $marked    = OP::isLocalhost() ? OP::URL('develop:/vender/marked.js')    : '//cdn.jsdelivr.net/npm/marked/marked.min.js';
@@ -53,4 +52,3 @@ $highlight = OP::isLocalhost() ? OP::URL('develop:/vender/highlight.js') : '//cd
 ?>
 <script src="<?= $marked    ?>"></script>
 <script src="<?= $highlight ?>"></script>
-
