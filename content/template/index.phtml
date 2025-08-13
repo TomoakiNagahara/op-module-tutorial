@@ -1,0 +1,137 @@
+<?php
+/**	op-module-tutorial:/content/template/index.phtml
+ *
+ * @created    2025-08-12
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
+
+/**	namespace
+ *
+ */
+namespace OP;
+
+?>
+<section class="markdown" data-translation="true">
+# About Template feature
+
+The ONEPIECE Framework's template function has the following features:
+
+* Ability to pass arguments
+* Ability to receive return values
+
+Let's get started developing!
+</section>
+
+<section class="markdown" data-translation="true">
+## Passing Arguments
+
+Currently `view.phtml` is output from `app:/test/index.php` as follows:
+
+```php
+OP()->Template('view.phtml');
+```
+
+To pass arguments, modify it as follows:
+
+```php
+//  Create an argument.
+$args = [
+    'p' => 'The NEW WORLD is a new world.',
+];
+
+//  Pass it as the second argument.
+OP()->Template('view.phtml', $args);
+```
+
+Arguments are assigned to `$_ARGS` within the template.
+In `view.phtml`, you can get the arguments as follows:
+
+```php
+<h1>Hello, new world?</h1>
+<p>&lt;?php echo $_ARGS['p'] ?&gt;</p>
+```
+
+Reload the page in your browser to see if the changes are reflected.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Did it displayed?',
+	'yes'=>'Good job!',
+	'no' =>'',
+]) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+## Receiving the return value
+
+Now, add the following code to the end of view.phtml.
+
+```php
+&lt;?php return 'Romance dawn!' ?&gt;
+```
+
+In `index.php`, modify it as follows:
+
+```php
+//  Create an argument.
+$args = [
+    'p' => 'The NEW WORLD is a new world.',
+];
+
+//  Pass it as the second argument and receive the return value
+$return = OP()->Template('view.phtml', $args);
+D( $return );
+```
+
+Reload the page in your browser to see if the changes are reflected.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Did it displayed?',
+	'yes'=>'Good job!',
+	'no' =>'',
+]) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+With what you've learned so far, you've mastered the Model View Controller, which is equivalent to an MVC framework.<br/>
+So in the next chapter, let's dig a little deeper into some control tips for `index.php`!
+</section>
+
+<section class="markdown" data-translation="true">
+# Key Takeaway - Last Piece of Advice
+
+Templates have the following features:
+
+* Pass arguments
+* Receive return values
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Did you understand the last piece of advice?',
+	'yes'=>'Super Great!!',
+	'no' =>'',
+]) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+# The next chapter is about the router in the ONEPIECE framework!
+
+<?php OP()->Template('tutorial:/feedback.phtml') ?>
+
+In the next chapter, we’ll dive into **Router**.
+
+[➡️ Let's move on to the next chapter: "Router"](<?php echo OP()->URL('tutorial:/router/') ?>)
+</section>
