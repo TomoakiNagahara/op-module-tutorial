@@ -13,4 +13,96 @@
  */
 namespace OP;
 
+//	...
+$_ORIGIN = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].($_SERVER['SERVER_PORT']==80?'':$_SERVER['SERVER_PORT']);
+
 ?>
+<section class="markdown" data-translation="true">
+# URL Arguments
+
+In the previous chapter, we learned that it is possible to receive the URL as arguments.<br/>
+In this chapter, as an advanced application, let’s learn how to perform branching in the controller based on the URL Arguments.
+</section>
+
+<section class="markdown" data-translation="true">
+## Let's try it!
+
+Modify `app:/test/index.php` as follows:
+
+```php
+&lt;?php
+//  Get URL Arguments.
+$args = OP()->Unit()->Router()->Args();
+
+//  If there are URL Arguments.
+if( count($args) ){
+	//  Route processing according to the first argument of the URL Arguments.
+	$arg = array_shift($args);
+	OP()->Template("{$arg}.php");
+}else{
+	//  Create an argument.
+	$args = [
+		'p' => 'The "NEW WORLD" is a new world!'
+	];
+
+	//  Set the above $args as the second argument.
+	OP()->Template('view.phtml', $args);
+}
+```
+
+Create `app:/test/hoge.php` and write the following.
+
+```php
+&lt;?php
+echo 'hoge';
+```
+
+Once you have created the above, please access the following URL:
+
+```
+<?= $_ORIGIN . OP()->URL('app:/test/hoge/') ?>
+
+```
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did "hoge" appear?','yes'=>'So Good!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+# Key Takeaway - The "NEW WORLD" is a new world!
+
+In the previous chapter, we explained the concept of controllers in the world of the ONEPIECE Framework.<br/>
+The new controller logic created within the ONEPIECE Framework has opened up a whole new world.<br/>
+In this chapter, we learned about a new system that passes the URL as arguments to the controller.<br/>
+
+This is the "NEW WORLD".
+
+Here’s a summary of how the "NEW WORLD" works:
+
+ * The index.php file in each directory serves as the controller.
+ * Nesting controllers is the easiest in the world.
+ * The URL can be used as arguments.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did you understand the NEW WORLD?','yes'=>'Super Great!!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+# The next chapter is "CI/CD"
+
+In the next chapter, you will commit the program you created here and push it to the repository using Git.
+The ONEPIECE Framework offers useful tools and various security features — with CI/CD being the first important among them.
+
+<?php OP()->Template('tutorial:/feedback.phtml') ?>
+
+In the next chapter, we’ll dive into **CI/CD**.
+Let’s try creating a new commit and pushing it to the repository using the CI/CD workflow❗
+
+[➡️ Let's move on to the next chapter: "CI/CD"](<?php echo OP()->URL('tutorial:/cicd/') ?>)
+</section>
