@@ -1,6 +1,8 @@
 <?php
 /**	op-module-tutorial:/content/left.php
  *
+ * Once you complete the mandatory tutorials, optional tutorials will be unlocked.
+ *
  * @created    2025-07-27
  * @version    1.0
  * @package    op-module-tutorial
@@ -23,7 +25,10 @@ if( $arg0 ){
 }
 
 //	...
-$list = [
+$unlock = OP()->Cookie()->Get('op-tutorial-complete');
+
+//	Core Tutorials
+$list[0] = [
 	'app'      => 'App',
 	'request'  => 'Request',
 	'router'   => 'Router',
@@ -41,9 +46,21 @@ $list = [
 	'module'   => 'Module',
 ];
 
+//	Bonus Tutorials
+$list[1] = [
+	'api'      => 'API',
+	'form'     => 'Form',
+	'database' => 'Database',
+	'crwd'     => 'CRWD',
+	'ci'       => 'CI',
+	'cd'       => 'CD',
+	'webpack'  => 'WebPack',
+];
+
 ?>
 <ul class="menu left">
-	<?php foreach( $list as $dir => $label ): ?>
+<?php foreach([0,1] as $i): ?>
+	<?php foreach( $list[$i] as $dir => $label ): ?>
 		<li>
 			<?php
 			//	...
@@ -55,11 +72,13 @@ $list = [
 				$href = OP()->URL("tutorial:/{$dir}/");
 			}
 			?>
-			<?php if( $href ): ?>
+
+			<?php if( $href or $unlock ): ?>
 				<a href="<?= $href ?>"><?= $label ?></a>
 			<?php else: ?>
 				<span><?= $label ?></span>
 			<?php endif; ?>
 		</li>
 	<?php endforeach; ?>
+<?php endforeach; ?>
 </ul>
