@@ -13,11 +13,156 @@
  */
 namespace OP;
 
+//	...
+$origin = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].($_SERVER['SERVER_PORT']==80?'':$_SERVER['SERVER_PORT']) ;
+
 ?>
-<section data-translation="true">
-	<?php OP::Html(file_get_contents('overview.md'),'div.markdown') ?>
+<section class="markdown" data-translation="true">
+# Learn how to control
+
+In the previous chapter, we learned that `index.php` is what we call a "controller".<br/>
+However, in the previous chapter, we only output `view.phtml` and did not actually "control" anything.<br/>
+In this chapter, we will learn about actual control techniques.
 </section>
 
-<section data-translation="true">
-	<?php OP::Html(file_get_contents('example.md'),'div.markdown') ?>
+<section class="markdown" data-translation="true">
+## URL Query
+
+As a simple example suitable for a tutorial, let's write a branching process using a URL query.<br/>
+A URL query is a parameter of the GET method added to the end of a URL.<br/>
+Specifically, it is a parameter at the end of the URL, such as the following:
+
+<pre><code>
+<?= $origin . OP()->URL('app:/test/') ?><span style="color:red;">?foo=bar</span>
+</code></pre>
+
+In PHP, this is the value assigned to `$_GET`.
+However, the ONEPICE framework does not recommend using `$_GET`.
+</section>
+
+<section class="markdown" data-translation="true">
+## Let's develop it!
+
+Modify `index.php` as follows and try to get the value of `view` from the URL query.
+
+Path: `<?= OP()->Path('app:/test/index.php') ?>`
+
+```
+&lt;?php
+// echo "Hello, new world";
+// include('view.phtml');
+$view = OP()->Request('view');
+var_dump($view);
+```
+
+Once you've made your edits, reload the page.<br/>
+You can get results with a URL query like this:
+
+<pre><code>
+<?= $origin . OP()->URL('app:/test/') ?><span style="color:red;">?view=foo</span>
+</code></pre>
+
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Did you get the URL query?',
+	'yes'=>'So Good!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+By the way, what is `OP()->Request()`?
+Let's explain the above `OP()->Request()`.
+
+### `OP()`
+
+First, let’s explain `OP()`.
+`OP()` is the core function of the ONEPIECE Framework.
+It connects all the features of the ONEPIECE Framework, and by using `OP()`, you can access every function within the framework.
+This time, we call `Request()`, which retrieves the URL query.
+
+### `Request()`
+
+`Request()` is a highly capable feature for retrieving URL queries.
+First, it automatically escapes parameters, making it very secure against attacks such as XSS.
+Next, it automatically switches between GET and POST.
+Furthermore, it also automatically handles JSON.
+</section>
+
+<section class="markdown" data-translation="true">
+## Let's take control!
+
+Now, let's change index.php as follows to control it!
+
+```
+&lt;?php
+// echo "Hello, new world";
+// include('view.phtml');
+$view = OP()->Request('view');
+var_dump($view);
+if( $view ){
+	include("view.phtml");
+else{
+	include("other.phtml");
+}
+```
+
+Create `other.phtml` and try accessing `<?= $origin . OP()->URL('app:/test/') ?>?view=1`!
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Did you able to control?',
+	'yes'=>'So very good!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+The control shown above is a simple example for the tutorial.
+However, this alone is enough to control any complex page.
+From here on, it’s all about your own ideas.
+</section>
+
+<section class="markdown" data-translation="true">
+# Key points of this chapter
+
+In this chapter, we learned the basics of controlling pages.
+By applying this basic, you can control any complex page.
+
+You also learned about two important features:
+
+The first is the OP() function.
+The `OP()` function is the core of the ONEPIECE Framework, enabling access to all of its.
+
+And the other is the `Request()` function.
+The `Request()` function is extremely useful for retrieving requests from users.
+This is because it automatically escapes parameters, eliminating the risk of XSS.
+In addition, it automatically switches between GET and POST, and not only that — it also supports JSON.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Can you control the page with this?',
+	'yes'=>'Super Great!!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+You have now grasped the advanced applications of the ONEPIECE Framework.
+With this, you can freely display pages starting from `index.php`.
+Now, let’s move on to the next chapter!
+</section>
+
+<section class="markdown" data-translation="true">
+# The second tutorial is over
+
+<?php OP()->Template('tutorial:/feedback.phtml') ?>
+
+In the next chapter, we'll take a technical look at what we've learned so far and get to the heart of the ONE PIECE framework!
+
+[➡️ Let's move on to the next chapter!](<?php echo OP()->URL('tutorial:/router/') ?>)
 </section>
