@@ -18,14 +18,38 @@ $_ORIGIN = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].($_SERVER['SER
 
 ?>
 <section class="markdown" data-translation="true">
-# What is the Router?
+In the first chapter, we explained that in the ONEPIECE Framework, `app.php` is executed first, followed by `index.php`.<br/>
+So how does the process move from `app.php` to `index.php`?<br/>
+At the end of `app.php`, you will find the following code:<br/>
 
-The router looks for which `index.php` to run based on the accessed URL.
+```php
+OP()->Unit()->App()->Auto();
+```
 
-For example, if you access `<?= $_ORIGIN . OP()->URL('app:/test/') ?>`,
-Locate `<?= OP()->Path('app:/test/index.php') ?>`.
+Here, the `App` Unit is being executed.
+But what's happening inside the `App` Unit?
+
+A rough the conceptual code is as follows:
+
+```php
+include( OP()->Unit()->Router()->EndPoint() );
+```
+
+The above code gets "EndPoint" at the `Router` Unit and executes it.<br/>
+So in this chapter, let's learn a little more about "Router" and "EndPoint".
 </section>
 
+<section class="markdown" data-translation="true">
+## About "Router" and "EndPoint"
+
+The router looks for which `index.php` to run based on the accessed URL.<br/>
+For example, when you access `<?= $_ORIGIN . OP()->URL('app:/test/') ?>`, it looks for `<?= OP()->Path('app:/test/index.php') ?>` to run.
+This is the "EndPoint".
+
+This mechanism makes it very easy to set up controllers, and furthermore, it allows you to seamlessly dig into sub directories as well.
+</section>
+
+<?php if( false ): ?>
 <section class="markdown" data-translation="true">
 ## More detailed explanation
 
@@ -49,9 +73,10 @@ The directory where this application is running is:
 
 When you access `<?= $_ORIGIN . OP()->URL('app:/test/') ?>`, `index.php` in the path `<?= OP()->URL('app:/test/') ?>` under the document root will be executed.
 </section>
+<?php endif; ?>
 
 <section class="markdown" data-translation="true">
-## What's your next challenge? Let's nest index.php files!
+## Place index.php in to the sub directory
 
 Nesting controllers is very easy in the ONEPIECE Framework.
 Just create a directory inside your directory and create `index.php` inside it!
@@ -180,9 +205,10 @@ In this chapter, we learned that we can nest controllers by simply creating an `
 
 We also learned that the remaining URL can be obtained as an argument.
 
-* `index.php` will become the controller for that directory.
-* You can nest controllers by simply creating `index.php` in each directory.
-* Any remaining URLs can be obtained as arguments.
+ * `index.php` will become the controller for that directory.
+ * Simply create an `index.php` in any directory and it will become your controller.
+ * You can nest controllers by simply creating `index.php` in sub directory.
+ * Any remaining URLs can be obtained as arguments.
 </section>
 
 <?php
@@ -192,11 +218,16 @@ if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did you understand the l
 ?>
 
 <section class="markdown" data-translation="true">
-# The next chapter is URL arguments
+# The next chapter is "CI/CD"
 
-In the next chapter, you will learn how to take advantage of URL arguments.
+In the next chapter, you will commit the program you created here and push it to the repository using Git.
+The ONEPIECE Framework offers useful tools and various security features.
+With "CI/CD" is the very important among them.
 
 <?php OP()->Template('tutorial:/feedback.phtml') ?>
 
-[➡️ Let's move on to the next chapter: "URL arguments"](<?php echo OP()->URL('tutorial:/newworld/') ?>)
+In the next chapter, we’ll dive into **CI/CD**.
+Let’s try creating a new commit and pushing it to the repository using the CI/CD workflow❗
+
+[➡️ Let's move on to the next chapter: "CI/CD"](<?php echo OP()->URL('tutorial:/cicd/') ?>)
 </section>
