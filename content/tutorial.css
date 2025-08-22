@@ -21,6 +21,10 @@
 	white-space: nowrap;
 }
 
+.menu.left span.icon {
+	margin-right: 0.2em;
+}
+
 a.button {
 	padding: 0.5em 1em ;
 	border: 1px solid var(--color-link);
