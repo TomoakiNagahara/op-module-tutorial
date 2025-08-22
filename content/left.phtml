@@ -25,7 +25,7 @@ if( $arg0 ){
 }
 
 //	...
-$unlock = OP()->Cookie()->Get('op-tutorial-complete');
+$unlock = null;
 
 //	Core Tutorials
 $list[0] = [
@@ -34,7 +34,7 @@ $list[0] = [
 	'router'   => 'Router',
 	'cicd'     => 'CI/CD',
 	'D'        => 'D()',
-//	'OP'       => 'OP()',
+	'OP'       => 'OP()',
 ];
 
 //	Bonus Tutorials
@@ -56,6 +56,8 @@ $list[1] = [
 	'webpack'  => 'WebPack',
 ];
 
+//	Default icon
+$lock = '📖';
 ?>
 <ul class="menu left">
 <?php foreach([0,1] as $i): ?>
@@ -63,21 +65,45 @@ $list[1] = [
 		<li>
 			<?php
 			//	...
+			$icon = $lock;
 			$href = null;
 			$hash = md5($dir);
+			$session = OP()->Session()->Get($hash);
+			$cookie  = OP()->Cookie()->Get("op-tutorial-{$dir}");
 
 			//	...
-			if( OP()->Session()->Get($hash) ){
+			if( $session ){
+				$icon = '🛶';
+			}
+
+			//	...
+			if( $cookie ){
+				$icon = '✅';
+			}
+
+			//	...
+			if( $cookie or $unlock ){
 				$href = OP()->URL("tutorial:/{$dir}/");
 			}
-			?>
 
-			<?php if( $href or $unlock ): ?>
-				<a href="<?= $href ?>"><?= $label ?></a>
-			<?php else: ?>
-				<span><?= $label ?></span>
-			<?php endif; ?>
+			//	...
+			if( $href ){
+				echo "<span class='icon'>{$icon}</span><a href='{$href}'>{$label}</a>";
+			}else{
+				echo "<span class='icon'>{$icon}</span><span>{$label}</span>";
+			}
+			?>
 		</li>
 	<?php endforeach; ?>
+
+	<!-- unlock -->
+	<?php if( $i === 0 ): ?>
+		<?php
+		$unlock = OP()->Cookie()->Get("op-tutorial-{$dir}");
+		$lock = $unlock ? '🔓':'🔒';
+		?>
+		<hr/>
+	<?php endif; ?>
+
 <?php endforeach; ?>
 </ul>
