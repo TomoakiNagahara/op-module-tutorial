@@ -1,0 +1,75 @@
+<?php
+/**	op-module-tutorial:/content/app/index.phtml
+ *
+ * @created    2025-07-31
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
+
+/**	namespace
+ *
+ */
+namespace OP;
+
+?>
+<section class="markdown" data-translation="true">
+## About Layouts
+
+A layout refers to the overall screen design of the site.
+Specifically, it defines how elements such as the header, footer, and menu are arranged.
+Once a layout is set, every page will output HTML with a consistent design.
+</section>
+
+<section class="markdown" data-translation="true">
+## How is it different from a Template?
+
+A template refers to reusable parts within a page.
+In some frameworks, headers and footers are called as templates on each page.
+In that case, every page requires code to call them, and if the code is forgotten, some pages will end up without a header or footer.
+By using the layout feature, you can prevent such mistakes.
+</section>
+
+<section class="markdown" data-translation="true">
+## Can I switch between multiple layouts?
+
+Yes, it’s possible. Layouts are located in `asset:/layout/`.
+Which layout to use is configured in the `asset:/config/layout.php` file.
+
+You can also change it dynamically as shown below.
+
+```php
+OP()->Config()->Set('layout',['name'=>'layout_name']);
+```
+</section>
+
+<section class="markdown" data-translation="true">
+## I want to temporarily turn off the layout
+
+You can dynamically turn it ON or OFF as shown below.
+
+```php
+OP()->Config()->Set('layout',['execute'=>false]);
+```
+</section>
+
+<section class="markdown" data-translation="true">
+## I want to add a other layout
+
+Run the following command:
+
+```sh
+php app.php path=/_develop/git/layout/add url=https://github.com/onepiece-framework/op-layout-model.git name=model
+```
+</section>
+
+<section class="markdown" data-translation="true">
+## I want to create my own layout module
+
+There is an `op-layout-model`, so please customize it as needed.
+</section>
+
+<section class="markdown" data-translation="true">
+<?php OP()->Template('tutorial:/feedback.phtml') ?>
+</section>
