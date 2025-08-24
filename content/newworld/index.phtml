@@ -14,7 +14,7 @@
 namespace OP;
 
 //	...
-$_ORIGIN = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].($_SERVER['SERVER_PORT']==80?'':$_SERVER['SERVER_PORT']);
+$origin = OP()->Unit()->App()->Origin();
 
 ?>
 <section class="markdown" data-translation="true">
@@ -60,7 +60,7 @@ echo 'hoge';
 Once you have created the above, please access the following URL:
 
 ```
-<?= $_ORIGIN . OP()->URL('app:/test/hoge/') ?>
+<?= $origin . OP()->URL('app:/test/hoge/') ?>
 
 ```
 </section>
