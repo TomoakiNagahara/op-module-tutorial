@@ -14,7 +14,7 @@
 namespace OP;
 
 //	...
-$_ORIGIN = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].($_SERVER['SERVER_PORT']==80?'':$_SERVER['SERVER_PORT']);
+$origin = OP()->Unit()->App()->Origin();
 
 ?>
 <section class="markdown" data-translation="true">
@@ -43,7 +43,7 @@ So in this chapter, let's learn a little more about "Router" and "EndPoint".
 ## About "Router" and "EndPoint"
 
 The router looks for which `index.php` to run based on the accessed URL.<br/>
-For example, when you access `<?= $_ORIGIN . OP()->URL('app:/test/') ?>`, it looks for `<?= OP()->Path('app:/test/index.php') ?>` to run.
+For example, when you access `<?= $origin . OP()->URL('app:/test/') ?>`, it looks for `<?= OP()->Path('app:/test/index.php') ?>` to run.
 This is the "EndPoint".
 
 This mechanism makes it very easy to set up controllers, and furthermore, it allows you to seamlessly dig into sub directories as well.
@@ -56,7 +56,7 @@ This mechanism makes it very easy to set up controllers, and furthermore, it all
 The current the "ORIGIN" is as follows:
 
 <pre><code>
-<?= $_ORIGIN ?>
+<?= $origin ?>
 </code></pre>
 
 The document root of the "ORIGIN" is as follows:
@@ -71,7 +71,7 @@ The directory where this application is running is:
 <?= OP()->Path('app:/') ?>
 </code></pre>
 
-When you access `<?= $_ORIGIN . OP()->URL('app:/test/') ?>`, `index.php` in the path `<?= OP()->URL('app:/test/') ?>` under the document root will be executed.
+When you access `<?= $origin . OP()->URL('app:/test/') ?>`, `index.php` in the path `<?= OP()->URL('app:/test/') ?>` under the document root will be executed.
 </section>
 <?php endif; ?>
 
@@ -124,7 +124,7 @@ echo 'bar';
 
 ---
 
-Please access `<?= $_ORIGIN . OP()->URL('app:/test/foo/') ?>` and `<?= $_ORIGIN . OP()->URL('app:/test/bar/') ?>` respectively and check if the display changes.
+Please access `<?= $origin . OP()->URL('app:/test/foo/') ?>` and `<?= $origin . OP()->URL('app:/test/bar/') ?>` respectively and check if the display changes.
 </section>
 
 <?php
@@ -154,7 +154,7 @@ app:/test/hoge/
 Try accessing the following URL. `app:/test/index.php` will be executed.
 
 ```
-<?= $_ORIGIN . OP()->URL('app:/test/hoge/') ?>
+<?= $origin . OP()->URL('app:/test/hoge/') ?>
 
 ```
 </section>
@@ -176,9 +176,10 @@ To retrieve the "hoge" saved as a URL argument, add the following code to `app:/
 
 ```php
 $args = OP()->Unit()->Router()->Args();
+D($args);
 ```
 
-Then, try visiting <?= $_ORIGIN . OP()->URL('app:/test/hoge/') ?> or <?= $_ORIGIN . OP()->URL('app:/test/hoge/fuga/') ?>.
+Then, try visiting <?= $origin . OP()->URL('app:/test/hoge/') ?> or <?= $origin . OP()->URL('app:/test/hoge/fuga/') ?>.
 </section>
 
 <?php
@@ -188,15 +189,14 @@ if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did you get the URL argu
 ?>
 
 <section class="markdown" data-translation="true">
-## The extra URLs can be obtained as a URL arguments
+## The remaining URLs can be obtained as a URL arguments
 
-By using URL arguments, a controller can create logic that respond according to the URL.
-
-We will continue to explain how to use URL arguments in the next chapter!
+By using this URL arguments, a controller can create logic that respond according to the URL.<br/>
+We'll cover how to use URL arguments in more detail in a later chapter!
 </section>
 
 <section class="markdown" data-translation="true">
-# Key Takeaway - Last Piece of Advice
+# Key points of this chapter
 
 In the previous chapter, you created a `test` directory under the "App" root and then created an `index.php` file inside the `test` directory.
 We also explained this `index.php` serves as the file that controls access to the directory.
