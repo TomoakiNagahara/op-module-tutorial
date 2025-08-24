@@ -14,7 +14,7 @@
 namespace OP;
 
 //	...
-$origin = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].($_SERVER['SERVER_PORT']==80?'':$_SERVER['SERVER_PORT']) ;
+$origin = OP()->Unit()->App()->Origin();
 
 ?>
 <section class="markdown" data-translation="true">
@@ -50,9 +50,11 @@ Path: `<?= OP()->Path('app:/test/index.php') ?>`
 ```
 &lt;?php
 // echo "Hello, new world";
-// include('view.phtml');
+
 $view = OP()->Request('view');
 var_dump($view);
+
+OP()->Template('view.phtml');
 ```
 
 Once you've made your edits, reload the page.<br/>
@@ -99,13 +101,14 @@ Now, let's change index.php as follows to control it!
 ```
 &lt;?php
 // echo "Hello, new world";
-// include('view.phtml');
+
 $view = OP()->Request('view');
 var_dump($view);
+
 if( $view ){
-	include("view.phtml");
+	OP()->Template("view.phtml");
 else{
-	include("other.phtml");
+	OP()->Template("other.phtml");
 }
 ```
 
