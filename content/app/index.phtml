@@ -13,6 +13,9 @@
  */
 namespace OP;
 
+//	...
+$origin = OP()->Unit()->App()->Origin();
+
 ?>
 <section class="markdown" data-translation="true">
 # Welcome to the First Tutorial
@@ -95,7 +98,7 @@ The program you saved should be executed!
 
 <pre><code>
 <?php
-echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].($_SERVER['SERVER_PORT']==80?'':$_SERVER['SERVER_PORT']).OP()->URL('app:/').'test/' ;
+echo $origin.OP()->URL('app:/').'test/' ;
 ?>
 </code></pre>
 
@@ -123,11 +126,13 @@ Modify `index.php` as shown below. The full path to the file is as follows: `<?=
 ```php
 &lt;?php
 // echo "Hello, new world";
-include('view.phtml');
+OP()->Template('view.phtml');
 ```
 
-The above source code outputs the `view.phtml` file.<br/>
-Create `view.phtml` file and add the code below.<br/>
+`OP()->Template()` loads a file and outputs it.
+In the above code, it loads `view.phtml` and outputs it.
+
+Now, create a `view.phtml` file and add the following code.<br/>
 The full path of the file to be created is as follows: `<?= OP()->Path('app:/test/view.phtml') ?>`
 
 ```html
@@ -140,7 +145,7 @@ Try reloading the following URL. Are the changes reflected?
 
 ```
 <?php
-echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].($_SERVER['SERVER_PORT']==80?'':$_SERVER['SERVER_PORT']).OP()->URL('app:/').'test/' ;
+echo $origin.OP()->URL('app:/').'test/' ;
 ?>
 
 ```
@@ -167,7 +172,7 @@ In the ONEPIECE Framework, the `index.php` file at a URL’s endpoint serves as 
 
 <?php
 if(!OP()->Template('tutorial:/yesno.phtml',[
-	'message'=>'Do you understand the role of the index.php?',
+	'message'=>'Do you understand the role of about index.php?',
 	'yes'=>'Super Great!!']) ){
 	return;
 }
