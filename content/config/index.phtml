@@ -1,0 +1,46 @@
+<?php
+/**	op-module-tutorial:/content/config/index.phtml
+ *
+ * @created    2025-08-24
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
+
+/**	namespace
+ *
+ */
+namespace OP;
+
+?>
+<section class="markdown" data-translation="true">
+# About the Configuration File
+
+The ONEPIECE framework's configuration files are located in `git:/asset/config/`.
+Each setting is organized by unit or module file name.
+
+Each setting can be retrieved using the following code:
+
+```php
+$layout = OP()->Config('layout');
+```
+
+Each setting can be overridden with code like this:
+
+```php
+$layout['name] = 'layout_name';
+OP()->Config('layout', $layout);
+```
+## Underscore Files
+
+The ONEPIECE framework's `.gitignore` file excludes files beginning with an underscore from commits.
+Therefore, if you want to change the settings only for your local development environment or production environment,
+you can do so by installing a file beginning with an underscore.
+
+For example, for `admin.php`, place the `_admin.php` file.
+</section>
+
+<section class="markdown" data-translation="true">
+<?php OP()->Template('tutorial:/feedback.phtml') ?>
+</section>
