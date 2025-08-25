@@ -13,5 +13,52 @@
  */
 namespace OP;
 
-//	...
-OP::Html(file_get_contents('overview.md'),'div.markdown');
+?>
+<section class="markdown" data-translation="true">
+# Sending and receiving APIs is easy
+
+## Installing the API Unit
+
+```sh
+php app.php _develop/git/unit/add name=api url=https://github.com/onepiece-framework/op-unit-api.git
+```
+
+## Get the request
+
+GET, POST, and JSON can all be retrieved using `OP()->Request()`.
+XML is not supported.
+
+```php
+D( OP()->Request() );
+```
+
+## Send
+
+Send always sends JSON:
+
+```php
+OP()->Unit()->API()->Out();
+```
+
+Add a value to JSON:
+
+```php
+OP()->Unit()->API()->Result('key', $value);
+```
+
+Add an error to JSON:
+
+```php
+OP()->Unit()->API()->Error('key', $value);
+```
+
+To add a Admin value:
+
+```php
+OP()->Unit()->API()->Admin('key', $value);
+```
+</section>
+
+<section class="markdown" data-translation="true">
+<?php OP()->Template('tutorial:/feedback.phtml') ?>
+</section>
