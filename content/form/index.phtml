@@ -1,0 +1,39 @@
+<?php
+/**	op-module-tutorial:/content/form/index.phtml
+ *
+ * @created    2025-08-24
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
+
+/**	namespace
+ *
+ */
+namespace OP;
+
+?>
+<section class="markdown" data-translation="true">
+</section>
+
+```php
+$config = [
+    'name'   => 'test_form',
+    'method' => 'post',
+    'action' => './',
+];
+
+$input = [
+    'name'  => 'single_text',
+    'type'  => 'text',
+    'value' => 'default value',
+];
+
+$config['input'][] = $input;
+
+OP()->Unit()->Form()->Config($config);
+OP()->Unit()->Form()->Start('test_form');
+OP()->Unit()->Form()->Input('single_text');
+OP()->Unit()->Form()->Finish('test_form');
+```
