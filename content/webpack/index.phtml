@@ -1,0 +1,58 @@
+<?php
+/**	op-module-tutorial:/content/webpack/index.phtml
+ *
+ * @created    2025-08-24
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
+
+/**	namespace
+ *
+ */
+namespace OP;
+
+?>
+<section class="markdown" data-translation="true">
+# `asset:/webpack`
+
+The JS and CSS used by the ONEPIECE framework have been checked out.
+
+# `asset:/module/webpack`
+
+A frontend for using WebPack
+
+# op-unit-webpack
+
+This is the unit that actually performs WebPack.
+Specifies the files you want to WebPack. Multiple files can be specified.
+
+```php
+OP()->Unit()->WebPack()->Auto('foo.js', 'bar.css');
+```
+
+You can also specify using wildcards
+
+```php
+OP()->Unit()->WebPack()->Auto('hoge.*');
+```
+
+You can specify a directory.
+Directories are searched recursively.
+
+```php
+OP()->Unit()->WebPack()->Auto('./');
+```
+
+You cannot specify a parent directory or a full path.
+
+```php
+OP()->Unit()->WebPack()->Auto('../');
+OP()->Unit()->WebPack()->Auto(__DIR__);
+```
+</section>
+
+<section class="markdown" data-translation="true">
+<?php OP()->Template('tutorial:/feedback.phtml') ?>
+</section>
