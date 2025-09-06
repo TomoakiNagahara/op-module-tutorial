@@ -46,6 +46,14 @@ Enter the following command, which will run the checks automatically and only pu
  1. Execute the command: Run `./cicd`.
 </section>
 
+<?php if( OP()->isAdmin() ): ?>
+<section class="markdown" data-translation="true">
+## Hint: Do you know where the APP route?
+The APP route for this app is here.
+<pre><code><?= OP()->Path('app:/') ?></code></pre>
+</section>
+<?php endif; ?>
+
 <?php
 if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did the "CI/CD" run?','yes'=>'Awesome!']) ){
 	return;
