@@ -57,7 +57,8 @@ $list[1] = [
 ];
 
 //	Default icon
-$lock = '📖';
+$lock = '☑️';
+
 ?>
 <ul class="menu left">
 <?php foreach([0,1] as $i): ?>
@@ -100,7 +101,7 @@ $lock = '📖';
 	<?php if( $i === 0 ): ?>
 		<?php
 		$unlock = OP()->Cookie()->Get("op-tutorial-{$dir}");
-		$lock = $unlock ? '🔓':'🔒';
+		$lock = $unlock ? '☑️':'🔒';
 		?>
 		<hr/>
 	<?php endif; ?>
