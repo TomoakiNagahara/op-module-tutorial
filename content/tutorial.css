@@ -1,4 +1,9 @@
 
+.markdown p {
+	/* Reflects line breaks without <br/> */
+	white-space: pre-wrap;
+}
+
 .no-wrap {
 	white-space: nowrap;
 }
