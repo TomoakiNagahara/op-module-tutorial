@@ -24,12 +24,44 @@ RootPath('develop',  $develop);
 $layout = OP()->Config('layout');
 $layout['name'] = OP()->Config('develop')['layout'] ?? 'flexbox';
 $layout['path']['menu']['top']  = realpath("./top.phtml");
-$layout['path']['menu']['left'] = realpath("./left.phtml");
+$layout['path']['menu']['left'] = realpath("./left2.phtml");
 OP()->Config('layout', $layout);
+
+//	Set yes/no hash.
+if( $hash = OP()->Request('hash') ){
+	OP()->Session()->Set($hash, true);
+}
 
 //	Get URL Args.
 $args = OP()->Unit()->Router()->Args();
 
+//	Branch page.
+switch( $type = strtolower($args[0] ?? '') ){
+	//	...
+	case 'required':
+		$path = "Required/$args[1].phtml";
+		break;
+
+	//	...
+	case 'core':
+		$path = "asset:/{$type}/tutorial/$args[1].phtml";
+		break;
+
+	//	...
+	case 'unit':
+	case 'module':
+	case 'layout':
+		if( $args[2] ?? null ){
+			$path = "asset:/{$type}/$args[1]/tutorial/$args[2].phtml";
+		}
+		break;
+
+	//	...
+	default:
+	$path = 'index.phtml';
+}
+
+/* I'll leave the code here because git diff is stupid.
 //	Branch page.
 if( empty($args) ){
 	$path = 'index.phtml';
@@ -41,9 +73,12 @@ if( empty($args) ){
 		OP()->Session()->Set($hash, true);
 	}
 }
+*/
 
 //	...
-OP::Template($path);
+if( $path ?? null ){
+	OP::Template($path);
+}
 
 //	...
 OP::Unit()->WebPack()->Auto('*.css');
