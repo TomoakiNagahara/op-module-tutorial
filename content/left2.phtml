@@ -1,0 +1,74 @@
+<?php
+/**	op-module-tutorial:/content/left2.php
+ *
+ * Once you complete the mandatory tutorials, optional tutorials will be unlocked.
+ *
+ * @created    2025-09-15
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
+
+/**	namespace
+ *
+ */
+namespace OP;
+
+//	...
+$categories = [
+	'Required',
+	'Core',
+	'Unit',
+	'Module',
+	'Layout',
+];
+
+?>
+<?php foreach($categories as $category): ?>
+	<p><?= $category ?></p>
+	<ul class="menu left">
+	<?php
+	if( $category === 'Required' ){
+		foreach( glob('Required/*.phtml') as $path ){
+			$file = basename($path, '.phtml');
+			$href = OP()->URL("tutorial:/{$category}/{$file}");
+			echo "<li><a href='{$href}'>{$file}</a></li>";
+		}
+	}else if( $category === 'Core' ){
+		foreach( glob( OP()->Path("asset:/core/tutorial/*.phtml") ) as $path ){
+			$file = basename($path, '.phtml');
+			$href = OP()->URL("tutorial:/{$category}/{$file}");
+			echo "<li><a href='{$href}'>{$file}</a></li>";
+		}
+	}else{
+		//	...
+		$list = [];
+		$cate = strtolower($category);
+
+		//	...
+		foreach( glob( OP()->Path("asset:/{$cate}/*/tutorial/") ) as $path ){
+			$path = substr($path, 0, -10);
+			$path = basename($path);
+			$list[] = $path;
+		}
+
+		//	...
+		foreach( $list as $name ){
+			if( $name === 'develop' ){
+				continue;
+			}
+			echo "<li>{$name}";
+			echo "<ul>";
+			foreach( glob( OP()->Path("asset:/{$cate}/{$name}/tutorial/*.phtml") ) as $path ){
+				$file = basename($path, '.phtml');
+				$href = OP()->URL("tutorial:/{$category}/{$name}/{$file}");
+				echo "<li><a href='{$href}'>{$file}</a></li>";
+			}
+			echo "</ul>";
+			echo "</li>";
+		}
+	}
+	?>
+	</ul>
+<?php endforeach; ?>
