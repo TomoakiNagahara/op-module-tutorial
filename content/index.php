@@ -81,7 +81,7 @@ if( $path ?? null ){
 }
 
 //	...
-OP::Unit()->WebPack()->Auto('*.css');
+OP::Unit()->WebPack()->Auto('tutorial.js','tutorial.css');
 OP::Unit()->WebPack()->Auto("asset:/webpack/css/syntax.css");
 OP::Unit()->WebPack()->Auto('develop:/webpack/markdown.*');
 
