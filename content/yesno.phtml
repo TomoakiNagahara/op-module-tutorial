@@ -32,10 +32,12 @@ if( OP()->Session()->Get($hash) ){
 ?>
 <section data-translation="true" class="yesno">
 	<p><?= $message ?></p>
-	<a class="button" href="?hash=<?= $hash ?>#<?= $hash ?>">Yes</a>
-	<a class="button" href="">No</a>
-	<form style="display:none">
-		<textarea></textarea>
+	<span class="button"><a href="?hash=<?= $hash ?>#<?= $hash ?>">Yes</a></span>
+	<span class="button"><a href="javascript:void(0)" class="no">No</a></span>
+
+	<form id="feedback" style="display:none; margin-top: 1.5em;">
+		<p>Please sent your feedback.</p>
+		<textarea style="width: 40em; height: 10em"></textarea><br/>
 		<button> Sent </button>
 	</form>
 </section>
