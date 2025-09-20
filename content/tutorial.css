@@ -8,6 +8,10 @@
  * @copyright  Tomoaki Nagahara All right reserved.
  */
 
+pre, code {
+	z-index: -1;
+}
+
 .markdown p {
 	/* Reflects line breaks without <br/> */
 	white-space: pre-wrap;
