@@ -111,6 +111,10 @@ main li {
 	margin-bottom: 1.5em;
 }
 
+div.yes {
+	margin: 2em 0;
+}
+
 :root {
 	--color-h1:      #f0f0f0;
 	--color-h1-bg:   #303030;
