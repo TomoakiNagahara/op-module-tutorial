@@ -7,3 +7,18 @@
  * @author     Tomoaki Nagahara
  * @copyright  Tomoaki Nagahara All right reserved.
  */
+
+addEventListener("DOMContentLoaded", () => {
+	let elem = document.querySelector('a.no');
+	if( elem ){
+		elem.addEventListener("click", (e) => {
+			//	...
+			e.preventDefault();
+			//	...
+			let elem = document.querySelector('#feedback');
+			if( elem ){
+				elem.style.display = 'block';
+			}
+		});
+	}
+});
