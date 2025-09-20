@@ -1,4 +1,13 @@
 
+/**	op-module-tutorial:/content/tutorial.css
+ *
+ * @created    2025-07-31
+ * @version    1.0
+ * @package    op-module-tutorial
+ * @author     Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara All right reserved.
+ */
+
 .markdown p {
 	/* Reflects line breaks without <br/> */
 	white-space: pre-wrap;
