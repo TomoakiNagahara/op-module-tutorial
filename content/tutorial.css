@@ -128,3 +128,16 @@ div.yes {
 	}
 }
 /* <?php endif; ?> */
+
+#feedback {
+	_border: 1px solid black;
+}
+
+#feedback p {
+	margin: 0.5em 0;
+	padding: 0;
+}
+
+#feedback textarea {
+	margin: 0.5em 0;
+}
