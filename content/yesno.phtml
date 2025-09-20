@@ -23,21 +23,23 @@ $hash = substr($hash, 0, 8);
 
 //	...
 if( OP()->Session()->Get($hash) ){
+	echo '<div class="yes">';
 	echo "👍";
 	if( $yes ?? null ){ echo " <span id='{$hash}' data-translation='true'>{$yes}</span>"; }
 	echo '<br/>';
+	echo '</div>';
 	return true;
 }
 
 ?>
-<section data-translation="true" class="yesno">
-	<p><?= $message ?></p>
-	<span class="button"><a href="?hash=<?= $hash ?>#<?= $hash ?>">Yes</a></span>
-	<span class="button"><a href="javascript:void(0)" class="no">No</a></span>
+<section class="yesno">
+	<p data-translation="true"><?= $message ?></p>
+	<span class="button"><a href="?hash=<?= $hash ?>#<?= $hash ?>"><span data-translation="true">Yes</span></a></span>
+	<span class="button"><a href="javascript:void(0)" class="no"><span data-translation="true">No</span></a></span>
 
 	<form id="feedback" style="display:none; margin-top: 1.5em;">
-		<p>Please sent your feedback.</p>
+		<p data-translation="true">Please sent your feedback.</p>
 		<textarea style="width: 40em; height: 10em"></textarea><br/>
-		<button> Sent </button>
+		<button data-translation="true"> Sent </button>
 	</form>
 </section>
