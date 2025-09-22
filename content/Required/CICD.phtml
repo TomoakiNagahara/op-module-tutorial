@@ -14,3 +14,176 @@
 namespace OP;
 
 ?>
+<section class="markdown" data-translation="true">
+# The ONEPIECE Framework includes "CI/CD"
+
+The ONEPIECE Framework's "CI/CD" is insanely great, with all classes organically connected to "CI".<br/>
+In this chapter, you will learn about the excellent "CI/CD" of the ONEPIECE Framework step by step!
+</section>
+
+<section class="markdown" data-translation="true">
+## What is CI/CD
+
+CI/CD consists of two components: CI and CD.<br/>
+
+ * `CI`: CI is stands for Code Inspection. If the code does not pass inspection, it cannot be pushed to the repository.<br/>
+ * `CD`: CD is stands for Code Delivery. Only code that passes CI will be push to the repository.<br/>
+</section>
+
+<section class="markdown" data-translation="true">
+## How do you run CI/CD?
+
+Just run the `cicd` command.<br/>
+Enter the following command, which will run the checks automatically and only push to the repository if all checks pass:
+<pre><code>./cicd</code></pre>
+</section>
+
+<section class="markdown" data-translation="true">
+# Let’s try it out
+
+ 1. Open the terminal app: The `cicd` command is executed by the CLI.
+ 1. Change directory to the "App" root: The `cicd` command exists in the "App" root.
+ 1. Execute the command: Run `./cicd`.
+</section>
+
+<?php if( OP()->isAdmin() ): ?>
+<section class="markdown" data-translation="true">
+## Hint: Do you know where the APP route?
+The APP route for this app is here.
+<pre><code><?= OP()->Path('app:/') ?></code></pre>
+</section>
+<?php endif; ?>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did the "CI/CD" run?','yes'=>'Awesome!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+## Let’s commit the changes and run "CI/CD"
+
+Let’s commit the `test` created in the previous chapter and push it to Git!
+
+ 1. Open the terminal and navigate to the "APP" Root.
+ 1. Use the Git command to add the `test` directory: `git add test`
+ 1. Use the Git command to commit the changes: `git commit`
+
+But `git commit` is should failed.
+The reason is that `var_dump()` is included in the commit.
+In the ONEPIECE framework, an error occurs when committing `var_dump` or `print_r`.
+
+So what should we do?
+
+Replace `var_dump()` with `D()`!<br/>
+The `D()` is a very highly secure dump tool provided by the ONEPIECE Framework. And, This also serves as a security measure.<br/>
+
+`var_dump()` and `print_r()` are very dangerous functions.
+Reveals information that should not be revealed to visitors other than the developer.
+Additionally, malicious users may be able to cause XSS.
+</section>
+
+<section class="markdown" data-translation="true">
+## Change to "D()"
+
+Your current `app:/test/index.php` should look like this:
+
+```
+&lt;?php
+// echo "Hello, new world";
+// include('view.phtml');
+$view = OP()->Request('view');
+var_dump($view);
+if( $view ){
+	include("view.phtml");
+else{
+	include("other.phtml");
+}
+```
+
+ 1. Open `app:/test/index.php` and change `var_dump` to `D`.
+ 1. Run `git add ./test/index.php`.
+ 1. Run `git commit`.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Did you complete the <code>git commit</code>?',
+	'yes'=>'Great! Maybe you are a genius!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+Now, let's continue by running "CI/CD".
+Do you know the command?
+If you don't know, look a little further up in the article.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Did the "CI/CD" succeed?',
+	'yes'=>'Great! You are now fully master CI/CD!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+# Technical Information
+
+## What option arguments are available for <code>cicd</code>?
+
+The following option arguments are available for <code>cicd</code>:
+
+<ul>
+	<li><code>test=1</code>: Runs in test mode. CI will automatically <code>git stash</code> any uncommitted changes. This option allows you to test your changes before committing them.</li>
+	<li><code>ci=0</code>: Skips the CI process. Use this when you only want to run CD. However, commits that have not passed code inspection will not be pushed.</li>
+	<li><code>cd=0</code>: Skips the CD process. Use this when you only want to run CI.</li>
+	<li><code>display=1</code>: Enables detailed output messages.</li>
+	<li><code>debug=1</code>: Displays debug information.</li>
+	<li><code>unit=app</code>: Runs CI only for the specified unit.</li>
+	<li><code>class=App</code>: Runs CI only for the specified class.</li>
+	<li><code>method=Auto</code>: Runs CI only for the specified method.</li>
+</ul>
+
+## What if my code needs `var_dump`?
+
+The `git` has a `--no-verify` option.
+
+```
+ git commit --no-verify
+```
+
+If you are using the `-m` option, use `-nm`.
+
+```
+ git commit -nm
+```
+</section>
+
+<section class="markdown" data-translation="true">
+# Key points of this chapter
+
+In the ONEPIECE Framework, by simply running `cicd`, code inspection and pushing to the Git repository are completed automatically.<br/>
+Also, if there are any dangerous strings in the code, they will be suppressed at the time of commit.<br/>
+However, if you need it for committing, you can avoid it by using optional arguments to git.<br/>
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did you understand the last piece of advice?','yes'=>'Super Great!!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+# The next chapter is `D()` function.
+
+In the next chapter, you’ll get to experience one of the most amazing features of the ONEPIECE Framework!<br/>
+Using `D()` will super charge your development productivity.<br/>
+
+<?php OP()->Template('tutorial:/feedback.phtml') ?>
+
+In the next chapter, we’ll dive into **D()**.
+
+[➡️ Let's move on to the next chapter: "D()"](<?php echo OP()->URL('tutorial:/Required/D') ?>)
+</section>
