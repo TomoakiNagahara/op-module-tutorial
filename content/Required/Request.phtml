@@ -12,3 +12,140 @@
  *
  */
 namespace OP;
+
+//	...
+$origin = OP()->Unit()->App()->Origin();
+
+?>
+<section class="markdown" data-translation="true">
+# Learn how to control
+
+In the previous chapter, we learned that `index.php` is what we call a "controller".<br/>
+However, in the previous chapter, we only output `view.phtml` and did not actually "control" anything.<br/>
+In this chapter, we will learn about actual control techniques.
+</section>
+
+<section class="markdown" data-translation="true">
+## URL Query
+
+As a simple example suitable for a tutorial, let's write a branching process using a URL query.<br/>
+A URL query is a parameter of the GET method added to the end of a URL.<br/>
+Specifically, it is a parameter at the end of the URL, such as the following:
+
+<pre><code>
+<?= $origin . OP()->URL('app:/test/') ?><span style="color:red;">?view=1</span>
+</code></pre>
+
+In PHP, values ​​passed in the URL query are assigned to `$_GET`.
+However, the ONEPICE framework does not recommend using `$_GET`.
+Because there are security risks such as XSS and SQL injection.
+Use `OP()->Request()` instead of `$_GET`.
+</section>
+
+<section class="markdown" data-translation="true">
+## Let's develop it!
+
+Modify `app:/test/index.php` as follows to get the `view` value passed in the URL query:
+Path: `<?= OP()->Path('app:/test/index.php') ?>`
+
+```
+&lt;?php
+// echo "Hello, new world";
+
+$view = OP()->Request('view');
+var_dump($view);
+
+OP()->Template('view.phtml');
+```
+
+Once you've made your edits, reload the page.<br/>
+You can get results with a URL query like this:
+
+<pre><code>
+<?= $origin . OP()->URL('app:/test/') ?><span style="color:red;">?view=1</span>
+</code></pre>
+
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Did you get the URL query?',
+	'yes'=>'So Good!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+We will explain `OP()->Request()` in detail in another chapter.
+You just remember that by using `OP()->Request()`, you can safely retrieve URL queries.
+</section>
+
+<section class="markdown" data-translation="true">
+## Let's take control!
+
+Now, let's change index.php as follows to control it!
+
+```
+&lt;?php
+// echo "Hello, new world";
+
+$view = OP()->Request('view');
+var_dump($view);
+
+if( $view == 1 ){
+	OP()->Template("view.phtml");
+}else{
+	OP()->Template("other.phtml");
+}
+```
+
+Create `other.phtml` and try accessing `<?= $origin . OP()->URL('app:/test/') ?>?view=1`!
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Did you able to control?',
+	'yes'=>'So very good!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+The control shown above is a simple example for the tutorial.
+However, this alone is enough to control any complex page.
+From here on, it’s all about your own ideas.
+</section>
+
+<section class="markdown" data-translation="true">
+# Key points of this chapter
+
+In this chapter, we learned the basics of controlling pages.
+By applying this basic, you can control any complex page.
+
+And one more thing — in this tutorial, we also learned about the `OP()->Request()` feature.
+Since `OP()->Request()` allows you to safely retrieve URL queries, please study it in detail in another chapter.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Can you control the page with this?',
+	'yes'=>'Super Great!!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+You have now grasped the advanced applications of the ONEPIECE Framework.
+With this, you can freely display pages starting from `index.php`.
+Now, let’s move on to the next chapter!
+</section>
+
+<section class="markdown" data-translation="true">
+# The second tutorial is over
+
+<?php OP()->Template('tutorial:/feedback.phtml') ?>
+
+In the next chapter, we'll take a technical look at what we've learned so far and get to the heart of the ONE PIECE framework!
+
+[➡️ Let's move on to the next chapter!](<?php echo OP()->URL('tutorial:/Required/Router') ?>)
+</section>
