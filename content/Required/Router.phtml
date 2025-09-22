@@ -12,3 +12,226 @@
  *
  */
 namespace OP;
+
+//	...
+$origin = OP()->Unit()->App()->Origin();
+
+?>
+<section class="markdown" data-translation="true">
+In the first chapter, we explained that in the ONEPIECE Framework, `app.php` is executed first, followed by `index.php`.<br/>
+So how does the process move from `app.php` to `index.php`?<br/>
+At the end of `app.php`, you will find the following code:<br/>
+
+```php
+OP()->Unit()->App()->Auto();
+```
+
+The above code the `Auto()` method of the `App` Unit is being executed.
+Well then, what's happening inside the that?
+
+A rough the conceptual code is as follows:
+
+```php
+class App {
+  function Auto(){
+    include( OP()->Unit()->Router()->EndPoint() );
+  }
+}
+```
+
+The above code gets "End-Point" from the `Router` Unit and executes it.<br/>
+So in this chapter, let's learn a little more about "Router" and "EndPoint".
+</section>
+
+<section class="markdown" data-translation="true">
+## About "Router" and "EndPoint"
+
+The router looks for which `index.php` to run based on the accessed URL.<br/>
+For example, when you access `<?= $origin . OP()->URL('app:/test/') ?>`, it looks for `<?= OP()->Path('app:/test/index.php') ?>` to run.
+This is the "EndPoint".
+
+This mechanism makes it very easy to set up controllers, and furthermore, it allows you to seamlessly dig into sub directories as well.
+</section>
+
+<?php if( false ): ?>
+<section class="markdown" data-translation="true">
+## More detailed explanation
+
+The current the "ORIGIN" is as follows:
+
+<pre><code>
+<?= $origin ?>
+</code></pre>
+
+The document root of the "ORIGIN" is as follows:
+
+<pre><code>
+<?= $_SERVER['DOCUMENT_ROOT'] ?>
+</code></pre>
+
+The directory where this application is running is:
+
+<pre><code>
+<?= OP()->Path('app:/') ?>
+</code></pre>
+
+When you access `<?= $origin . OP()->URL('app:/test/') ?>`, `index.php` in the path `<?= OP()->URL('app:/test/') ?>` under the document root will be executed.
+</section>
+<?php endif; ?>
+
+<section class="markdown" data-translation="true">
+## Place index.php in to the sub directory
+
+Nesting controllers is very easy in the ONEPIECE Framework.
+Just create a directory inside your directory and create `index.php` inside it!
+
+Specifically, create a directory structure like this:
+
+```
+app:/test/
+         ├─ index.php
+         ├─ foo/index.php
+         └─ bar/index.php
+```
+
+ * app:/test/index.php – Controls access to /test/
+ * app:/test/foo/index.php – Controls access to /test/foo/
+ * app:/test/bar/index.php – Controls access to /test/bar/
+
+In the ONEPIECE Framework, each index.php serves as the controller for its respective directory.
+</section>
+
+<section class="markdown" data-translation="true">
+## Let's try it!
+
+In the previous chapter, we created a `test` directory under the "APP" root and created `index.php` in the `test` directory.<br/>
+Your "APP" root is here: `<?= OP()->Path('app:/') ?>`<br/>
+Remember that the "APP" route is written as `app:/`?
+
+---
+
+Create `app:/test/foo/index.php` and write the following in it:
+
+```php
+&lt;?php
+echo 'foo';
+```
+
+---
+
+Create `app:/test/bar/index.php` and write the following in it:
+
+```php
+&lt;?php
+echo 'bar';
+```
+
+---
+
+Please access `<?= $origin . OP()->URL('app:/test/foo/') ?>` and `<?= $origin . OP()->URL('app:/test/bar/') ?>` respectively and check if the display changes.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Are the changes reflected?',
+	'yes'=>'Good! Now you have nested controllers!',
+]) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+## What if a directory does not contain an `index.php`?
+
+What happens if someone accesses a directory that does not contain an `index.php` file?
+The answer is: **nothing happens!** Let’s give it a try!
+
+---
+
+Please create the following directory.
+Create only the directory, not the files.
+
+```
+app:/test/hoge/
+```
+
+Try accessing the following URL. `app:/test/index.php` will be executed.
+
+```
+<?= $origin . OP()->URL('app:/test/hoge/') ?>
+
+```
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Is app:/test/index.php running?','yes'=>'So Good!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+## By the way, where did "hoge" disappear to?
+
+The "hoge" hasn’t disappeared. It was stored as a URL arguments.
+
+URL arguments are a technique that treats "index.php" as an argument if it is not found.
+
+To retrieve the "hoge" saved as a URL argument, add the following code to `app:/test/index.php`.
+
+```php
+$args = OP()->Unit()->Router()->Args();
+var_dump($args);
+```
+
+Then, try visiting <?= $origin . OP()->URL('app:/test/hoge/') ?> or <?= $origin . OP()->URL('app:/test/hoge/fuga/') ?>.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did you get the URL arguments?','yes'=>'So very Good!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+## The remaining URLs can be obtained as a URL arguments
+
+By using this URL arguments, a controller can create logic that respond according to the URL.<br/>
+We'll cover how to use URL arguments in more detail in a later chapter!
+</section>
+
+<section class="markdown" data-translation="true">
+# Key points of this chapter
+
+In the previous chapter, you created a `test` directory under the "App" root and then created an `index.php` file inside the `test` directory.
+We also explained this `index.php` serves as the file that controls access to the directory.
+
+In this chapter, we learned that we can nest controllers by simply creating an `index.php` file in each directory.
+
+We also learned that the remaining URL can be obtained as an argument.
+
+ * `index.php` will become the controller for that directory.
+ * Simply create an `index.php` in any directory and it will become your controller.
+ * You can nest controllers by simply creating `index.php` in sub directory.
+ * Any remaining URLs can be obtained as arguments.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did you understand the last piece of advice?','yes'=>'Super Great!!']) ){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+# The next chapter is "CI/CD"
+
+In the next chapter, you will commit the program you created here and push it to the repository using Git.
+The ONEPIECE Framework offers useful tools and various security features.
+With "CI/CD" is the very important among them.
+
+<?php OP()->Template('tutorial:/feedback.phtml') ?>
+
+In the next chapter, we’ll dive into **CI/CD**.
+Let’s try creating a new commit and pushing it to the repository using the CI/CD workflow❗
+
+[➡️ Let's move on to the next chapter: "CI/CD"](<?php echo OP()->URL('tutorial:/Required/CICD') ?>)
+</section>
