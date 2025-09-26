@@ -68,7 +68,7 @@ The important files covered in this chapter are listed below.
 1. `asset` directory:
     This directory contains many files required for the ONEPIECE Framework to function properly.
 1. `app.php`:
-    This file is the first one executed by the ONEPIECE Framework.
+    This file is the first file that the ONEPIECE framework executes.
     Activate the ONEPIECE mechanism, and then hands over control to `index.php`.
     This is generally referred to as an "entry point".
 1. `index.php`:
@@ -194,7 +194,11 @@ In this chapter, we learned the order in which the ONEPIECE framework is execute
 We learned that `app.php` is executed first, and then `index.php`, located at the URL location, is executed.<br/>
 There was no need to edit `app.php`.
 
-All you created and edited was a `test` directory, `index.php` and `view.phtml`.<br/>
+First, you created a `test` directory in the "App" root.
+In the ONEPIECE framework, the path is written as `app:/test/`.
+
+Next, you created the `index.php` and `view.phtml` files in the `test` directory.
+The passes will be `app:/test/index.php` and `app:/test/view.phtml`.
 
 In the ONEPIECE Framework, the `index.php` file at a URL’s "End-Point" serves as the controller for that directory.
 
@@ -204,7 +208,7 @@ This will be explained in more detail in a dedicated chapter.
 
 <?php
 if(!OP()->Template('tutorial:/yesno.phtml',[
-	'message'=>'Do you understand the role of about index.php?',
+	'message'=>'Do you understand that if you create "index.php" in the directory, it will become the "controller"?',
 	'yes'=>'Super Great!!',
 ])){
 	return;
@@ -223,7 +227,7 @@ Now, let’s move on to the next chapter!
 
 <?php OP()->Template('tutorial:/feedback.phtml') ?>
 
-In the next chapter, we will learn how to make some modifications to the controller we created in this chapter and perform more advanced control.
+In the next chapter, you'll learn how to output HTML file without creating controllers.
 
-[➡️ Let's move on to the next chapter!](<?php echo OP()->URL('tutorial:/Required/Request') ?>)
+[➡️ Let's move on to the next chapter!](<?php echo OP()->URL('tutorial:/Required/HTML') ?>)
 </section>
