@@ -24,22 +24,33 @@ $categories = [
 	'Layout',
 ];
 
+//	...
+$lock   = '🔒️';
+$done   = '✅️';
+$undone = '📖';
+$unlock = OP()->Cookie()->Get('op-tutorial-Required-CICD');
+
 ?>
 <?php foreach($categories as $category): ?>
 	<p><?= $category ?></p>
 	<ul class="menu left">
 	<?php
+	$icon = $lock;
 	if( $category === 'Required' ){
 		foreach( glob('Required/*.phtml') as $path ){
 			$file = basename($path, '.phtml');
 			$href = OP()->URL("tutorial:/{$category}/{$file}");
-			echo "<li><a href='{$href}'>{$file}</a></li>";
+			$icon = OP()->Cookie()->Get("op-tutorial-{$category}-{$file}") ? $done: $undone;
+			echo "<li><span class='icon'>{$icon}</span><a href='{$href}'>{$file}</a></li>";
 		}
 	}else if( $category === 'Core' ){
 		foreach( glob( OP()->Path("asset:/core/tutorial/*.phtml") ) as $path ){
 			$file = basename($path, '.phtml');
 			$href = OP()->URL("tutorial:/{$category}/{$file}");
-			echo "<li><a href='{$href}'>{$file}</a></li>";
+			if( $unlock ){
+				$icon = OP()->Cookie()->Get("op-tutorial-{$category}-{$file}") ? $done: $undone;
+			}
+			echo "<li><span class='icon'>{$icon}</span><a href='{$href}'>{$file}</a></li>";
 		}
 	}else{
 		//	...
@@ -63,7 +74,10 @@ $categories = [
 			foreach( glob( OP()->Path("asset:/{$cate}/{$name}/tutorial/*.phtml") ) as $path ){
 				$file = basename($path, '.phtml');
 				$href = OP()->URL("tutorial:/{$category}/{$name}/{$file}");
-				echo "<li><a href='{$href}'>{$file}</a></li>";
+				if( $unlock ){
+					$icon = OP()->Cookie()->Get("op-tutorial-{$category}-{$name}-{$file}") ? $done: $undone;
+				}
+				echo "<li><span class='icon'>{$icon}</span><a href='{$href}'>{$file}</a></li>";
 			}
 			echo "</ul>";
 			echo "</li>";
