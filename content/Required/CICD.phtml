@@ -81,6 +81,7 @@ The `D()` is a very highly secure dump tool provided by the ONEPIECE Framework. 
 `var_dump()` and `print_r()` are very dangerous functions.
 Reveals information that should not be revealed to visitors other than the developer.
 Additionally, malicious users may be able to cause XSS.
+There is no risk of a security incident when using `D()`.
 </section>
 
 <section class="markdown" data-translation="true">
@@ -176,14 +177,12 @@ if(!OP()->Template('tutorial:/yesno.phtml',['message'=>'Did you understand the l
 ?>
 
 <section class="markdown" data-translation="true">
-# The next chapter is `D()` function.
-
-In the next chapter, you’ll get to experience one of the most amazing features of the ONEPIECE Framework!<br/>
-Using `D()` will super charge your development productivity.<br/>
+# Required tutorial is all done!
 
 <?php OP()->Template('tutorial:/feedback.phtml') ?>
 
-In the next chapter, we’ll dive into **D()**.
+This completes the required tutorial.
+Try other tutorials in any order.
 
-[➡️ Let's move on to the next chapter: "D()"](<?php echo OP()->URL('tutorial:/Required/D') ?>)
+[➡️ Let's move to the any tutorial](<?php echo OP()->URL('tutorial:/') ?>)
 </section>
