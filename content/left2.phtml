@@ -30,6 +30,15 @@ $done   = '✅️';
 $undone = '📖';
 $unlock = OP()->Cookie()->Get('op-tutorial-Required-CICD');
 
+//	...
+$_required = [
+	'App'     => 'App',
+	'HTML'    => 'HTML',
+	'Request' => 'Request',
+	'Router'  => 'Router',
+	'CICD'    => 'CI/CD',
+];
+
 ?>
 <?php foreach($categories as $category): ?>
 	<p><?= $category ?></p>
@@ -37,20 +46,23 @@ $unlock = OP()->Cookie()->Get('op-tutorial-Required-CICD');
 	<?php
 	$icon = $lock;
 	if( $category === 'Required' ){
-		foreach( glob('Required/*.phtml') as $path ){
-			$file = basename($path, '.phtml');
-			$href = OP()->URL("tutorial:/{$category}/{$file}");
-			$icon = OP()->Cookie()->Get("op-tutorial-{$category}-{$file}") ? $done: $undone;
-			echo "<li><span class='icon'>{$icon}</span><a href='{$href}'>{$file}</a></li>";
+		foreach( $_required as $file => $label ){
+			$icon = OP()->Cookie()->Get("op-tutorial-{$category}-{$file}") ? $done : ($icon == $done ? $undone : $lock);
+			$href = $icon != $lock ? OP()->URL("tutorial:/{$category}/{$file}"): null;
+			$atag = $href ? "<a href='{$href}'>{$label}</a>" : $label;
+			echo "<li><span class='icon'>{$icon}</span>{$atag}</li>";
 		}
 	}else if( $category === 'Core' ){
 		foreach( glob( OP()->Path("asset:/core/tutorial/*.phtml") ) as $path ){
 			$file = basename($path, '.phtml');
-			$href = OP()->URL("tutorial:/{$category}/{$file}");
 			if( $unlock ){
 				$icon = OP()->Cookie()->Get("op-tutorial-{$category}-{$file}") ? $done: $undone;
+			}else{
+				$icon = $lock;
 			}
-			echo "<li><span class='icon'>{$icon}</span><a href='{$href}'>{$file}</a></li>";
+			$href = $icon != $lock ? OP()->URL("tutorial:/{$category}/{$file}"): null;
+			$atag = $href ? "<a href='{$href}'>{$file}</a>" : $file;
+			echo "<li><span class='icon'>{$icon}</span>{$atag}</li>";
 		}
 	}else{
 		//	...
@@ -73,11 +85,14 @@ $unlock = OP()->Cookie()->Get('op-tutorial-Required-CICD');
 			echo "<ul>";
 			foreach( glob( OP()->Path("asset:/{$cate}/{$name}/tutorial/*.phtml") ) as $path ){
 				$file = basename($path, '.phtml');
-				$href = OP()->URL("tutorial:/{$category}/{$name}/{$file}");
 				if( $unlock ){
 					$icon = OP()->Cookie()->Get("op-tutorial-{$category}-{$name}-{$file}") ? $done: $undone;
+				}else{
+					$icon = $lock;
 				}
-				echo "<li><span class='icon'>{$icon}</span><a href='{$href}'>{$file}</a></li>";
+				$href = $icon != $lock ? OP()->URL("tutorial:/{$category}/{$name}/{$file}") : null;
+				$atag = $href ? "<a href='{$href}'>{$file}</a>" : $file;
+				echo "<li><span class='icon'>{$icon}</span>{$atag}</li>";
 			}
 			echo "</ul>";
 			echo "</li>";
