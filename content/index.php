@@ -34,9 +34,10 @@ if( $hash = OP()->Request('hash') ){
 
 //	Get URL Args.
 $args = OP()->Unit()->Router()->Args();
+$type = isset($args[1]) ? strtolower($args[0] ?? ''): null;
 
 //	Branch page.
-switch( $type = strtolower($args[0] ?? '') ){
+switch( $type ){
 	//	...
 	case 'required':
 		$path = "Required/$args[1].phtml";
