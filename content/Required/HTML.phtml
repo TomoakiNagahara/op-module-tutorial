@@ -13,4 +13,156 @@
  */
 namespace OP;
 
+//	...
+$origin = OP()->Unit()->App()->Origin();
+
 ?>
+<section class="markdown" data-translation="true">
+In the previous chapter, we learned that the `index.php` file functions as a controller.
+This is a very simple and easy-to-use specification.
+
+However, in real-world applications, there are many cases where you just want to display HTML.
+In other words, simply displaying HTML is enough, so a controller is not necessary.
+Nevertheless, traditional MVC-type web frameworks always required the creation of a controller and even empty methods.
+
+But the ONEPIECE Framework is different.
+There is no need to meaninglessly create a controller just to display HTML.
+
+If all you want to do is display HTML, you just need to create an HTML file and output it as-is.
+That is HTML pass-through!
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Would you like to learn more about HTML pass-through?',
+	'yes'=>"Isn't it?",
+])){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+# What is HTML Pass-through?
+
+HTML pass-through is a feature that directly outputs an `.html` file when it is accessed, without going through a controller. Naturally, the URL and the file path match.
+
+Its main features are as follows:
+
+- No controller required
+- Can execute PHP scripts
+- Layout rendering is also supported
+
+## Controller less
+
+In traditional web frameworks, even for simple HTML pages that did not require any business logic, it was always necessary to create a controller and prepare empty methods.
+However, in the ONEPIECE Framework, when a file with the `.html` extension is accessed, its contents are output directly, eliminating the need for meaningless controllers or empty methods.
+
+## Executing PHP Scripts
+
+Some frameworks provide plain HTML access instead of HTML pass-through.
+This simply means that the web server does not invoke the framework and simple responds to the browser as a traditional static page.
+Of course, PHP is not executed. That output is just a static page.
+
+But the HTML pass-through feature of the ONEPIECE Framework is different.
+It can execute PHP within HTML files, and since it can access the framework’s functionality, it is possible to output also the results of database queries.
+Of course, rendering of layout is performed.
+
+## Rendering of Layout
+Some frameworks do not catch access to files with the `.html` extension.
+In other words, the web server simply returns them as static pages.
+This means not only that PHP is not executed, but also that layouts are not rendered.
+
+When layouts are not rendered, developers and designers must hard-code common elements such as headers and footers into each page. This makes updates very troublesome, and information such as login details—for example, displaying the username in the header—cannot be shown.
+
+But the HTML pass-through feature of the ONEPIECE Framework also renders layouts.
+In other words, it renders headers, footers, side menus, and breadcrumb navigation, seamlessly integrating the content of the HTML file into the site output.
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>"Don't you think that's amazing?",
+	'yes'=>"That's right!!",
+])){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+## Let's develop it!
+
+Please create an HTML file at the following path: `app:/test/test.html`
+
+In `test.html`, try adding the following source code:
+
+```html
+<h1>test.html</h1>
+<p>Hello new world!</p>
+&lt;?php echo OP()->Timestamp() ?&gt;
+```
+
+After saving the file, try accessing the following URL:
+
+<pre><code>
+<?php
+echo $origin.OP()->URL('app:/').'test/test.html' ;
+?>
+</code></pre>
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>"Were you able to display the HTML file without a controller?",
+	'yes'=>"So good!",
+])){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+Try creating multiple HTML files with different filenames, and check that they are displayed without a controller!
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>"Have you tried it and been successful?",
+	'yes'=>"So very good!",
+])){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+# Key points of this chapter
+
+In this chapter, we learned about HTML pass-through. The characteristics of HTML pass-through are as follows:
+
+1. Files with the `.html` extension
+2. Without creating a controller
+3. Execute PHP
+4. With layout rendering
+5. Are output
+
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Did you see that HTML pass-through is an extremely useful and powerful feature?',
+	'yes'=>'Super Great!!',
+])){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="false">
+
+</section>
+
+<section class="markdown" data-translation="true">
+# The second tutorial is over
+
+<?php OP()->Template('tutorial:/feedback.phtml') ?>
+
+In the next chapter, you will modify the controller created in the previous chapter and learn how to perform more advanced control.
+
+[➡️ Let's move on to the next chapter!](<?php echo OP()->URL('tutorial:/Required/Request') ?>)
+</section>
