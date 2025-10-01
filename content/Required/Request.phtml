@@ -20,9 +20,9 @@ $origin = OP()->Unit()->App()->Origin();
 <section class="markdown" data-translation="true">
 # Learn how to control
 
-In the previous chapter, we learned that `index.php` is what we call a "controller".<br/>
-However, in the previous chapter, we only output `view.phtml` and did not actually "control" anything.<br/>
-In this chapter, we will learn about actual control techniques.
+In the first chapter, you learned that `index.php` is what we call a "controller".<br/>
+But, that only output of `view.phtml` and did not actually "control" anything.<br/>
+In this chapter, you will learn about actual control techniques.
 </section>
 
 <section class="markdown" data-translation="true">
@@ -112,7 +112,7 @@ if(!OP()->Template('tutorial:/yesno.phtml',[
 
 <section class="markdown" data-translation="true">
 The control shown above is a simple example for the tutorial.
-However, this alone is enough to control any complex page.
+But, this alone is enough to control any complex page.
 From here on, it’s all about your own ideas.
 </section>
 
@@ -128,7 +128,7 @@ Since `OP()->Request()` allows you to safely retrieve URL queries, please study 
 
 <?php
 if(!OP()->Template('tutorial:/yesno.phtml',[
-	'message'=>'Can you control the page with this?',
+	'message'=>'Can you control the output?',
 	'yes'=>'Super Great!!']) ){
 	return;
 }
@@ -141,7 +141,7 @@ Now, let’s move on to the next chapter!
 </section>
 
 <section class="markdown" data-translation="true">
-# The second tutorial is over
+# The third tutorial is over
 
 <?php OP()->Template('tutorial:/feedback.phtml') ?>
 
