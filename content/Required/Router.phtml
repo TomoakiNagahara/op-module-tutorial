@@ -200,19 +200,41 @@ We'll cover how to use URL arguments in more detail in a later chapter!
 </section>
 
 <section class="markdown" data-translation="true">
+# Tips
+
+What if you want to call a constant or function that is shared across multiple pages from different pages?
+Use `include`.
+
+```php
+//  app:/test/index.php
+include('common.php');
+```
+
+```php
+//  app:/test/foo/index.php
+include('../common.php');
+```
+
+```php
+//  app:/test/bar/index.php
+include('../common.php');
+```
+</section>
+
+<section class="markdown" data-translation="true">
 # Key points of this chapter
 
-In the previous chapter, you created a `test` directory under the "App" root and then created an `index.php` file inside the `test` directory.
-We also explained this `index.php` serves as the file that controls access to the directory.
-
-In this chapter, we learned that we can nest controllers by simply creating an `index.php` file in each directory.
-
-We also learned that the remaining URL can be obtained as an argument.
+In the first chapter, you created a `test` directory under the "App" root and then created an `index.php` file inside the `test` directory.
+The ONEPIECE framework only executes `index.php` stored in each directory.
+In this `index.php`, you control what is output depending on the client request.
+And, you also learned that we can nest controllers by simply creating an `index.php` file in each directory.
+Furthermore, you also learned that if `index.php` does not exist in the endpoint of the URL, the remaining URL can be obtained as an arguments.
 
  * `index.php` will become the controller for that directory.
  * Simply create an `index.php` in any directory and it will become your controller.
  * You can nest controllers by simply creating `index.php` in sub directory.
  * Any remaining URLs can be obtained as arguments.
+ * Use `include` to shared constants and functions specific to that directory.
 </section>
 
 <?php
