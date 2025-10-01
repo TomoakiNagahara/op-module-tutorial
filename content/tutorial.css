@@ -136,6 +136,7 @@ div.yes {
 
 #feedback {
 	_border: 1px solid black;
+	margin-left: 0.5em;
 }
 
 #feedback p {
