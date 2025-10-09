@@ -62,19 +62,18 @@ Let me explain the following important files.
 1. `LICENSE`: This is the license for the ONEPIECE Framework.
 1. `README.md`: It contains instructions on how to install and start the ONEPIECE Framework.
 1. `cicd`: This is the command to run CI/CD. This will be explained in detail in the CI/CD chapter.
-
-The important files covered in this chapter are listed below.
-
 1. `asset` directory:
     This directory contains many files required for the ONEPIECE Framework to function properly.
 1. `app.php`:
     This file is the first file that the ONEPIECE framework executes.
-    Activate the ONEPIECE mechanism, and then hands over control to `index.php`.
-    This is generally referred to as an "entry point".
+    Activate the ONEPIECE mechanism, and then hands over control to index.php.
+    This is generally referred to as an **entry point**.
 1. `index.php`:
     This file is controls access to that directory.
-    You can place an `index.php` file in each directory as needed.
-    In a typical MVC architecture, this file is called the "controller".
+    You can place an index.php file in each directory as needed.
+    In a typical MVC architecture, this file is called the **controller**.
+1. `index.html`: This is a sample page for HTML pass-through.
+1. `favicon.ico`: This is the default icon.
 </section>
 
 <?php
@@ -108,7 +107,9 @@ Please create a `test` directory in the `app:/`. The full path is as follows:
 <?= OP()->Path('app:/test/') ?>
 </code></pre>
 
-Inside the newly created `test` directory, create a file named `index.php`. The full path is as follows:
+Inside the newly created `app:/test/` directory, create a file named `index.php`.
+In the ONEPIECE framework, `index.php` is the file that controls so that directory.
+The full path is as follows:
 
 <pre><code>
 <?= OP()->Path('app:/test/index.php') ?>
@@ -149,7 +150,7 @@ In a typical MVC architecture, it's common to separate "controllers" and "views"
 In the ONEPIECE Framework, the file extension for "views" must be `phtml`.<br/>
 So, let's separate them into `index.php` and `view.phtml`!<br/>
 
-Modify `index.php` as shown below. The full path to the file is as follows: `<?= OP()->Path('app:/test/index.php') ?>`
+Modify `app:/test/index.php` as shown below. The full path to the file is as follows: `<?= OP()->Path('app:/test/index.php') ?>`
 
 ```php
 &lt;?php
@@ -157,17 +158,16 @@ Modify `index.php` as shown below. The full path to the file is as follows: `<?=
 OP()->Template('view.phtml');
 ```
 
-`OP()->Template()` is loads a file and outputs it.
-In the above code, it loads `view.phtml` and outputs it.
+`OP()->Template()` is loads a file and outputs it. In the above code, it loads `view.phtml` and outputs it. We will explain `OP()->Template()` in detail in a dedicated chapter.
 
-Now, create a `view.phtml` file and add the following code.<br/>
+Now, create a `app:/test/view.phtml` file and add the following code.<br/>
 The full path of the file to be created is as follows: `<?= OP()->Path('app:/test/view.phtml') ?>`
 
 ```html
-<h1>Hello, new world!</h1>
+<h1>Hello, the NEW WORLD!</h1>
 ```
 
-Try reloading the following URL. Are the changes reflected?
+Try reloading the following URL. If the changes are reflected, it's successful.
 
 ```
 <?php
@@ -189,18 +189,20 @@ if(!OP()->Template('tutorial:/yesno.phtml',[
 <section class="markdown" data-translation="true">
 # Key points of this chapter
 
-In this chapter, we learned the order in which the ONEPIECE framework is executed.
+In this chapter, you learned about "controller" and "view".
 
-We learned that `app.php` is executed first, and then `index.php`, located at the URL location, is executed.<br/>
-There was no need to edit `app.php`.
-
-First, you created a `test` directory in the "App" root.
+First, you created a `test` directory in the "APP" root.
 In the ONEPIECE framework, the path is written as `app:/test/`.
 
-Next, you created the `index.php` and `view.phtml` files in the `test` directory.
-The passes will be `app:/test/index.php` and `app:/test/view.phtml`.
+Second, you created the `index.php` and `view.phtml` files in the `test` directory.
+These are written as `app:/test/index.php` and `app:/test/view.phtml`.
 
-In the ONEPIECE Framework, the `index.php` file at a URL’s "End-Point" serves as the controller for that directory.
+`index.php` acts as the controller for that directory.
+
+The role of the view has been separated to `view.phtml`.
+
+One is `index.php`, which served as the controller for that directory.
+The other is `view.phtml`, which acted as the view.
 
 And you used `OP()->Template()`, an important feature of the ONEPIECE framework.
 This will be explained in more detail in a dedicated chapter.
@@ -208,7 +210,7 @@ This will be explained in more detail in a dedicated chapter.
 
 <?php
 if(!OP()->Template('tutorial:/yesno.phtml',[
-	'message'=>'Do you understand that if you create "index.php" in the directory, it will become the "controller"?',
+	'message'=>'Can you see that creating an index.php in a directory makes it a controller?',
 	'yes'=>'Super Great!!',
 ])){
 	return;
@@ -222,11 +224,10 @@ There’s nothing more to learn in this chapter — you’ve mastered it perfect
 Now, let’s move on to the next chapter!
 </section>
 
-<section class="markdown" data-translation="true">
-# The first tutorial is over
-
 <?php OP()->Template('tutorial:/feedback.phtml') ?>
 
+<section class="markdown" data-translation="true">
+The first tutorial is over
 In the next chapter, you'll learn how to output HTML file without creating controllers.
 
 [➡️ Let's move on to the next chapter!](<?php echo OP()->URL('tutorial:/Required/HTML') ?>)
