@@ -13,6 +13,18 @@
  */
 namespace OP;
 
+//	...
+if( $feedback = OP()->Request('feedback') ){
+	$uri      = join('/', OP()->Unit()->Router()->Args());
+	$to       = 'info@onepiece-framework.com';
+	$subject  = "Feedback: {$uri}";
+	$message  = $feedback;
+	if( $sendmail = OP()->Mail($to, $subject, $message) ){
+		$feedback = '';
+	}
+	D($feedback, $uri, $to, $subject, $message);
+}
+
 ?>
 
 <div style="margin-left: 0em">
@@ -25,10 +37,15 @@ Was it easy? Was it difficult? Or was it hard to understand?<br/>
 We’d love to hear your thoughts—feel free to share your feedback!<br/>
 </section>
 
-<form id="feedback">
-	<textarea style="width: 40em; height: 10em"></textarea><br/>
+<?php if( $sendmail ): ?>
+	<P data-translation="true">Thank you for your feedback, we will take it into consideration.</P>
+<?php else: ?>
+<form id="feedback" method="post">
+	<textarea style="width: 40em; height: 10em" name="feedback"><?= $feedback ?></textarea><br/>
 	<button data-translation="true"> Sent </button>
 </form>
+<?php endif; ?>
+
 
 </div>
 
