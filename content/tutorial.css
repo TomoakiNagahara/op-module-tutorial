@@ -8,6 +8,11 @@
  * @copyright  Tomoaki Nagahara All right reserved.
  */
 
+/* Smooth scroll */
+html {
+	scroll-behavior: smooth;
+}
+
 pre, code {
 	z-index: -1;
 }
