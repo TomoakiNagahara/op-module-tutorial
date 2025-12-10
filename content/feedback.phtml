@@ -37,7 +37,7 @@ Was it easy? Was it difficult? Or was it hard to understand?<br/>
 We’d love to hear your thoughts—feel free to share your feedback!<br/>
 </section>
 
-<?php if( $sendmail ): ?>
+<?php if( $sendmail ?? null ): ?>
 	<P data-translation="true">Thank you for your feedback, we will take it into consideration.</P>
 <?php else: ?>
 <form id="feedback" method="post">
