@@ -36,9 +36,8 @@ if(!OP()->Template('tutorial:/yesno.phtml',[
 ## "APP" Root
 
 First, let me explain the "APP" Root.<br/>
-The "APP" Root refers to the directory where the ONEPIECE application is executed.<br/>
+The "APP" root is the directory where the ONEPIECE application is published.<br/>
 In the case of this application, the following directory is the "APP" Root.<br/>
-
 <pre><code>
 <?= OP()->Path('app:/') ?>
 </code></pre>
@@ -56,7 +55,29 @@ if(!OP()->Template('tutorial:/yesno.phtml',[
 ?>
 
 <section class="markdown" data-translation="true">
-Now, please check the "APP" Root.
+## "GIT" Root
+
+Next, let me explain the "GIT" Root.<br/>
+The "GIT" root is the directory that was cloned in Git.<br/>
+If your "document root" has been changed, you will find the "APP" root under your "GIT" root.<br/>
+<pre><code>
+<?= OP()->Path('git:/') ?>
+</code></pre>
+
+Please open the directory above. You should see the ONEPIECE Framework installed there.<br/>
+</section>
+
+<?php
+if(!OP()->Template('tutorial:/yesno.phtml',[
+	'message'=>'Were you able to open the "GIT" root?',
+	'yes'=>'So Good!'
+])){
+	return;
+}
+?>
+
+<section class="markdown" data-translation="true">
+Now, please check the "GIT" Root.
 Let me explain the following important files.
 
 1. `LICENSE`: This is the license for the ONEPIECE Framework.
@@ -101,7 +122,7 @@ if(!OP()->Template('tutorial:/yesno.phtml',[
 <section class="markdown" data-translation="true">
 ## Let's get started with development!
 
-Please create a `test` directory in the `app:/`. The full path is as follows:
+Please create a `test` directory in the `app:/`. The PATH is as follows:
 
 <pre><code>
 <?= OP()->Path('app:/test/') ?>
@@ -109,7 +130,7 @@ Please create a `test` directory in the `app:/`. The full path is as follows:
 
 Inside the newly created `app:/test/` directory, create a file named `index.php`.
 In the ONEPIECE framework, `index.php` is the file that controls so that directory.
-The full path is as follows:
+The PATH is as follows:
 
 <pre><code>
 <?= OP()->Path('app:/test/index.php') ?>
