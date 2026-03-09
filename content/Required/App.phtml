@@ -87,13 +87,13 @@ Let me explain the following important files.
     This directory contains many files required for the ONEPIECE Framework to function properly.
 1. `app.php`:
     This file is the first file that the ONEPIECE framework executes.
-    Activate the ONEPIECE mechanism, and then hands over control to index.php.
+    Activate the ONEPIECE mechanism, and then hands over control to "index.php".
     This is generally referred to as an **entry point**.
 1. `index.php`:
     This file is controls access to that directory.
-    You can place an index.php file in each directory as needed.
-    In a typical MVC architecture, this file is called the **controller**.
-1. `index.html`: This is a sample page for HTML pass-through.
+    You can place an "index.php" file in each directory as needed.
+    "index.php" corresponds to the **controller** in a typical MVC architecture.
+1. `pass-through.html`: This is a sample page for HTML pass-through.
 1. `favicon.ico`: This is the default icon.
 </section>
 
@@ -107,12 +107,12 @@ if(!OP()->Template('tutorial:/yesno.phtml',[
 ?>
 
 <section class="markdown" data-translation="true">
-Please note that from now on, the "APP" root will be expressed as `app:/`, so please make sure to remember this!<br/>
+By the way, in ONEPIECE Framework, the "APP root" can be written as "app:/".
 </section>
 
 <?php
 if(!OP()->Template('tutorial:/yesno.phtml',[
-	'message'=>'Did you understand app:/?',
+	'message'=>'So please make sure to remember this!',
 	'yes'=>'Excellent!',
 ])){
 	return;
@@ -167,11 +167,11 @@ if(!OP()->Template('tutorial:/yesno.phtml',[
 ## Separate the "controller" and the "view"
 
 So we're at it, let's make one more change.<br/>
-In a typical MVC architecture, it's common to separate "controllers" and "views".<br/>
-In the ONEPIECE Framework, the file extension for "views" must be `phtml`.<br/>
-So, let's separate them into `index.php` and `view.phtml`!<br/>
+In a typical MVC architecture, it's common to separate "controller" and "view".<br/>
+So let's split it into `index.php` and `view.phtml`!<br/>
+By the way, in the ONE PIECE Framework, the file extension of "view" is `phtml`!<br/>
 
-Modify `app:/test/index.php` as shown below. The full path to the file is as follows: `<?= OP()->Path('app:/test/index.php') ?>`
+Please modify `<?= OP()->Path('app:/test/index.php') ?>` as follows.
 
 ```php
 &lt;?php
@@ -179,23 +179,16 @@ Modify `app:/test/index.php` as shown below. The full path to the file is as fol
 OP()->Template('view.phtml');
 ```
 
-`OP()->Template()` is loads a file and outputs it. In the above code, it loads `view.phtml` and outputs it. We will explain `OP()->Template()` in detail in a dedicated chapter.
+`OP()->Template()` is reads and outputs the specified file.
+In the above code, it loads `view.phtml` and outputs it. We will explain `OP()->Template()` in detail in a dedicated chapter.
 
 Now, create a `app:/test/view.phtml` file and add the following code.<br/>
-The full path of the file to be created is as follows: `<?= OP()->Path('app:/test/view.phtml') ?>`
 
 ```html
 <h1>Hello, the NEW WORLD!</h1>
 ```
 
-Try reloading the following URL. If the changes are reflected, it's successful.
-
-```
-<?php
-echo $origin.OP()->URL('app:/').'test/' ;
-?>
-
-```
+Reload the page to see the changes.
 </section>
 
 <?php
